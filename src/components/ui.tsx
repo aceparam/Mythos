@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { ReactNode, useState } from "react";
+import { ReactNode, useId, useState } from "react";
 
 export function Card({
   title,
@@ -140,24 +140,31 @@ export function SliderField({
   step?: number;
   display?: string;
 }) {
+  // The range input must NOT be wrapped in a <label>: Firefox forwards label
+  // clicks to the input, which breaks dragging the thumb entirely.
+  const id = useId();
   return (
-    <label className="block">
+    <div className="block select-none">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>
-        <span className="text-sm font-semibold tabular-nums text-indigo-600 dark:text-indigo-400">
+        <label htmlFor={id} className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          {label}
+        </label>
+        <output htmlFor={id} className="text-sm font-semibold tabular-nums text-indigo-600 dark:text-indigo-400">
           {display ?? value}
-        </span>
+        </output>
       </div>
       <input
+        id={id}
         type="range"
-        className="mt-2 w-full accent-indigo-600"
+        className="mt-2 h-6 w-full cursor-pointer accent-indigo-600"
+        style={{ touchAction: "none" }}
         value={value}
         min={min}
         max={max}
         step={step}
         onChange={(e) => onChange(Number(e.target.value))}
       />
-    </label>
+    </div>
   );
 }
 
