@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export function Card({
   title,
@@ -81,6 +81,15 @@ export function NumberField({
   suffix?: string;
   hint?: string;
 }) {
+  // Draft holds the raw text while the user is typing so the field can be
+  // cleared and partial numbers don't snap back to a formatted value.
+  const [draft, setDraft] = useState<string | null>(null);
+  const clampVal = (n: number) => {
+    let v = n;
+    if (min !== undefined) v = Math.max(min, v);
+    if (max !== undefined) v = Math.min(max, v);
+    return v;
+  };
   return (
     <label className="block">
       <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>
@@ -88,12 +97,24 @@ export function NumberField({
         {prefix && <span className="pl-3 text-sm text-slate-500">{prefix}</span>}
         <input
           type="number"
+          inputMode="decimal"
           className="w-full rounded-lg bg-transparent px-3 py-2 text-sm tabular-nums outline-none"
-          value={Number.isFinite(value) ? value : 0}
+          value={draft ?? (Number.isFinite(value) ? String(value) : "")}
           min={min}
           max={max}
           step={step}
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={(e) => {
+            const text = e.target.value;
+            setDraft(text);
+            const n = Number(text);
+            if (text !== "" && Number.isFinite(n)) onChange(n);
+          }}
+          onBlur={() => {
+            const n = Number(draft ?? String(value));
+            const final = clampVal(draft === "" || !Number.isFinite(n) ? (min ?? 0) : n);
+            setDraft(null);
+            if (final !== value) onChange(final);
+          }}
         />
         {suffix && <span className="pr-3 text-sm text-slate-500">{suffix}</span>}
       </div>

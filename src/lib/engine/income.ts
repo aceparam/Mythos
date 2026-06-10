@@ -1,4 +1,5 @@
 import { IncomeSource, Profile } from "../types";
+import { sanitizeProfile } from "./retirement";
 
 export interface IncomeYear {
   age: number;
@@ -27,10 +28,11 @@ export interface IncomePlan {
  * the post-retirement return.
  */
 export function planRetirementIncome(
-  p: Profile,
+  profile: Profile,
   sources: IncomeSource[],
   startingCorpus: number,
 ): IncomePlan {
+  const p = sanitizeProfile(profile);
   const years: IncomeYear[] = [];
   const g = p.inflationPct / 100;
   const r = p.postReturnPct / 100;

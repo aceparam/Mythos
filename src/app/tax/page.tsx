@@ -14,7 +14,10 @@ import { Badge, Card, NumberField, Stat } from "@/components/ui";
 export default function TaxPage() {
   const { profile } = usePlanner();
 
-  const [income, setIncome] = useState(profile.annualIncome);
+  // Follow the saved profile (which loads after mount) unless the user edits.
+  const [incomeOverride, setIncomeOverride] = useState<number | null>(null);
+  const income = incomeOverride ?? profile.annualIncome;
+  const setIncome = setIncomeOverride;
   const [d80c, setD80c] = useState(150_000);
   const [nps, setNps] = useState(0);
   const [d80d, setD80d] = useState(25_000);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner } from "@/lib/store";
+import { uid, usePlanner } from "@/lib/store";
 import { analyzeGoal, totalGoalMonthly } from "@/lib/engine/goals";
 import { analyzeRetirement } from "@/lib/engine/retirement";
 import { Goal, GoalCategory } from "@/lib/types";
@@ -43,15 +43,15 @@ export default function GoalsPage() {
 
 
   const submit = () => {
-    if (!name.trim() || cost <= 0 || years <= 0) return;
+    if (!name.trim() || cost <= 0) return;
     addGoal({
-      id: crypto.randomUUID(),
+      id: uid(),
       name: name.trim(),
       category,
       presentCost: cost,
-      yearsToGoal: years,
-      saved,
-      inflationPct: inflation,
+      yearsToGoal: Math.max(1, Math.round(years)),
+      saved: Math.max(0, saved),
+      inflationPct: Math.max(0, inflation),
     } satisfies Goal);
     setName("");
     setSaved(0);

@@ -74,6 +74,14 @@ function currentMonth(): string {
   return new Date().toISOString().slice(0, 7);
 }
 
+/** crypto.randomUUID is unavailable on non-HTTPS origins — fall back gracefully. */
+export function uid(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `id-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export const usePlanner = create<PlannerState>()(
   persist(
     (set, get) => ({
@@ -106,7 +114,7 @@ export const usePlanner = create<PlannerState>()(
           scenarios: [
             ...get().scenarios,
             {
-              id: crypto.randomUUID(),
+              id: uid(),
               name,
               profile: { ...get().profile },
               createdAt: new Date().toISOString(),

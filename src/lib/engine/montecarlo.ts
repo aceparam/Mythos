@@ -1,4 +1,5 @@
 import { MonteCarloResult, Profile } from "../types";
+import { sanitizeProfile } from "./retirement";
 
 /** Deterministic PRNG (mulberry32) so simulations are reproducible. */
 function mulberry32(seed: number) {
@@ -45,7 +46,8 @@ function percentile(sorted: number[], q: number): number {
  * accumulation and drawdown, inflation-growing withdrawals in retirement.
  * Success = corpus survives to life expectancy.
  */
-export function runMonteCarlo(p: Profile, runs = 2000, seed = 42): MonteCarloResult {
+export function runMonteCarlo(profile: Profile, runs = 2000, seed = 42): MonteCarloResult {
+  const p = sanitizeProfile(profile);
   const rand = mulberry32(seed);
   const gauss = makeGaussian(rand);
 

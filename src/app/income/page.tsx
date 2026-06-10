@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner } from "@/lib/store";
+import { uid, usePlanner } from "@/lib/store";
 import { planRetirementIncome } from "@/lib/engine/income";
 import { projectCorpusAtRetirement } from "@/lib/engine/retirement";
 import { IncomeSource } from "@/lib/types";
@@ -76,7 +76,7 @@ export default function IncomePage() {
               onClick={() => {
                 if (amount <= 0) return;
                 addIncomeSource({
-                  id: crypto.randomUUID(),
+                  id: uid(),
                   kind,
                   monthlyAmount: amount,
                   inflationLinked: linked === "yes",
