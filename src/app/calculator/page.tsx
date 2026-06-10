@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { analyzeRetirement, earliestRetirementAge } from "@/lib/engine/retirement";
 import { runMonteCarlo } from "@/lib/engine/montecarlo";
 import { formatCompact, formatINR } from "@/lib/format";
@@ -9,7 +9,6 @@ import { Button, Card, NumberField, SliderField, Stat } from "@/components/ui";
 import { CorpusTimelineChart } from "@/components/charts";
 
 export default function CalculatorPage() {
-  const hydrated = useHydrated();
   const { profile, setProfile, saveScenario } = usePlanner();
   const [saved, setSaved] = useState(false);
 
@@ -17,7 +16,6 @@ export default function CalculatorPage() {
   const mc = useMemo(() => runMonteCarlo(profile, 1000), [profile]);
   const earliest = useMemo(() => earliestRetirementAge(profile), [profile]);
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   return (
     <div className="space-y-6">

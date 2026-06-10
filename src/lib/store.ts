@@ -1,6 +1,5 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import {
@@ -137,7 +136,13 @@ export const usePlanner = create<PlannerState>()(
           history: [],
         }),
     }),
-    { name: "mythos-planner-v1" },
+    {
+      name: "mythos-planner-v1",
+      // Rehydrate after mount (see Shell) so the server HTML and the first
+      // client render both use defaults — no hydration mismatch, and pages
+      // render instantly without a loading gate.
+      skipHydration: true,
+    },
   ),
 );
 
@@ -145,13 +150,3 @@ export const usePlanner = create<PlannerState>()(
  * Zustand's persist rehydrates from localStorage on the client only; gate UI
  * on this to avoid hydration mismatches between server HTML and saved state.
  */
-const emptySubscribe = () => () => {};
-export function useHydrated(): boolean {
-  // Server snapshot is false, client snapshot is true — flips exactly once
-  // after hydration, when persisted localStorage state is available.
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false,
-  );
-}

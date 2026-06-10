@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import {
   computeNewRegime,
   computeOldRegime,
@@ -12,7 +12,6 @@ import { formatCompact, formatINR } from "@/lib/format";
 import { Badge, Card, NumberField, Stat } from "@/components/ui";
 
 export default function TaxPage() {
-  const hydrated = useHydrated();
   const { profile } = usePlanner();
 
   const [income, setIncome] = useState(profile.annualIncome);
@@ -39,7 +38,6 @@ export default function TaxPage() {
   const cgTax = useMemo(() => equityCapitalGainsTax(ltcg, stcg), [ltcg, stcg]);
   const ops = useMemo(() => taxOpportunities(input), [input]);
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   const better = oldR.tax <= newR.tax ? "old" : "new";
   const saving = Math.abs(oldR.tax - newR.tax);

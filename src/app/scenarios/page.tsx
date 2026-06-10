@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { analyzeRetirement } from "@/lib/engine/retirement";
 import { runMonteCarlo } from "@/lib/engine/montecarlo";
 import { formatCompact, formatINR } from "@/lib/format";
@@ -13,7 +13,6 @@ import { Trash2 } from "lucide-react";
 const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ec4899", "#06b6d4", "#8b5cf6"];
 
 export default function ScenariosPage() {
-  const hydrated = useHydrated();
   const { scenarios, removeScenario, profile, saveScenario } = usePlanner();
 
   const rows = useMemo(
@@ -38,7 +37,6 @@ export default function ScenariosPage() {
     [rows],
   );
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   return (
     <div className="space-y-6">

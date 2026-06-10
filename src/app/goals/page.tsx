@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { analyzeGoal, totalGoalMonthly } from "@/lib/engine/goals";
 import { analyzeRetirement } from "@/lib/engine/retirement";
 import { Goal, GoalCategory } from "@/lib/types";
@@ -19,7 +19,6 @@ const CATEGORIES: GoalCategory[] = [
 ];
 
 export default function GoalsPage() {
-  const hydrated = useHydrated();
   const { goals, addGoal, removeGoal, profile } = usePlanner();
 
   const [name, setName] = useState("");
@@ -42,7 +41,6 @@ export default function GoalsPage() {
     return { base, diverted };
   }, [profile, goalMonthly]);
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   const submit = () => {
     if (!name.trim() || cost <= 0 || years <= 0) return;

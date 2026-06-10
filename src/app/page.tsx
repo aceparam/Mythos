@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { analyzeRetirement } from "@/lib/engine/retirement";
 import { runMonteCarlo } from "@/lib/engine/montecarlo";
 import { computeReadiness } from "@/lib/engine/score";
@@ -14,7 +14,6 @@ import { AllocationPie, CorpusTimelineChart } from "@/components/charts";
 import { ArrowRight, Printer, Sparkles } from "lucide-react";
 
 export default function Dashboard() {
-  const hydrated = useHydrated();
   const { profile, assets, liabilities, onboarded } = usePlanner();
 
   const ret = useMemo(() => analyzeRetirement(profile), [profile]);
@@ -22,10 +21,6 @@ export default function Dashboard() {
   const score = useMemo(() => computeReadiness(profile, assets, liabilities), [profile, assets, liabilities]);
   const recs = useMemo(() => buildRecommendations(profile, assets, liabilities), [profile, assets, liabilities]);
   const slices = useMemo(() => allocationByClass(assets), [assets]);
-
-  if (!hydrated) {
-    return <p className="py-20 text-center text-sm text-slate-400">Loading your plan…</p>;
-  }
 
   const bandTone = score.band === "green" ? "good" : score.band === "yellow" ? "warn" : "bad";
 

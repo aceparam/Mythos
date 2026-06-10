@@ -2,19 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { formatCompact } from "@/lib/format";
 import { Button, NumberField, Progress, SliderField, TextField } from "@/components/ui";
 
 const STEPS = ["About you", "Spending", "Savings", "Assumptions"] as const;
 
 export default function OnboardingPage() {
-  const hydrated = useHydrated();
   const router = useRouter();
   const { profile, setProfile, setOnboarded } = usePlanner();
   const [step, setStep] = useState(0);
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   const finish = () => {
     setOnboarded(true);

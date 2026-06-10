@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import clsx from "clsx";
 import { useTheme } from "@/lib/theme";
+import { usePlanner } from "@/lib/store";
 import {
   Bot,
   Calculator,
@@ -39,6 +40,11 @@ export default function Shell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [dark, toggleDark] = useTheme();
   const [open, setOpen] = useState(false);
+
+  // Load saved plan from localStorage after mount (persist has skipHydration).
+  useEffect(() => {
+    usePlanner.persist.rehydrate();
+  }, []);
 
   const nav = (
     <nav className="flex flex-col gap-1 p-3">

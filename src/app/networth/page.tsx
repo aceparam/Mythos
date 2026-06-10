@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import {
   ASSET_META,
   LIABILITY_META,
@@ -17,7 +17,6 @@ import { Badge, Card, NumberField, Stat } from "@/components/ui";
 import { AllocationPie, NetWorthTrendChart } from "@/components/charts";
 
 export default function NetWorthPage() {
-  const hydrated = useHydrated();
   const { assets, liabilities, setAssets, setLiabilities, profile, history } = usePlanner();
 
   const slices = useMemo(() => allocationByClass(assets), [assets]);
@@ -27,7 +26,6 @@ export default function NetWorthPage() {
     [history],
   );
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   return (
     <div className="space-y-6">

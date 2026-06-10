@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { planRetirementIncome } from "@/lib/engine/income";
 import { projectCorpusAtRetirement } from "@/lib/engine/retirement";
 import { IncomeSource } from "@/lib/types";
@@ -13,7 +13,6 @@ import { Trash2 } from "lucide-react";
 const KINDS: IncomeSource["kind"][] = ["Pension", "Rental", "Dividends", "Annuity", "SWP", "Other"];
 
 export default function IncomePage() {
-  const hydrated = useHydrated();
   const { profile, incomeSources, addIncomeSource, removeIncomeSource } = usePlanner();
 
   const [kind, setKind] = useState<IncomeSource["kind"]>("Pension");
@@ -38,7 +37,6 @@ export default function IncomePage() {
     [plan],
   );
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   return (
     <div className="space-y-6">

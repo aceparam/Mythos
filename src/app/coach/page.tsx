@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { askCoach, SUGGESTED_QUESTIONS } from "@/lib/engine/coach";
 import { Button, Card } from "@/components/ui";
 import { Bot, Send, User } from "lucide-react";
@@ -13,7 +13,6 @@ interface Message {
 }
 
 export default function CoachPage() {
-  const hydrated = useHydrated();
   const { profile, assets, liabilities } = usePlanner();
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -24,7 +23,6 @@ export default function CoachPage() {
   const [input, setInput] = useState("");
   const endRef = useRef<HTMLDivElement>(null);
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   const ask = (question: string) => {
     const q = question.trim();

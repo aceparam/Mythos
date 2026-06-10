@@ -1,20 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { runMonteCarlo } from "@/lib/engine/montecarlo";
 import { formatCompact } from "@/lib/format";
 import { Card, SliderField, Stat } from "@/components/ui";
 import { FanChart, HistogramChart, SurvivalChart } from "@/components/charts";
 
 export default function MonteCarloPage() {
-  const hydrated = useHydrated();
   const { profile, setProfile } = usePlanner();
   const [runs, setRuns] = useState(2000);
 
   const result = useMemo(() => runMonteCarlo(profile, runs), [profile, runs]);
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   const tone =
     result.successProbability >= 80 ? "good" : result.successProbability >= 60 ? "warn" : "bad";

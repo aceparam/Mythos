@@ -1,14 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { usePlanner, useHydrated } from "@/lib/store";
+import { usePlanner } from "@/lib/store";
 import { analyzeFire } from "@/lib/engine/fire";
 import { formatCompact } from "@/lib/format";
 import { Badge, Card, SliderField } from "@/components/ui";
 import { Flame } from "lucide-react";
 
 export default function FirePage() {
-  const hydrated = useHydrated();
   const { profile } = usePlanner();
   const [swr, setSwr] = useState(3.5);
   const [spendOverride, setSpendOverride] = useState<number | null>(null);
@@ -29,7 +28,6 @@ export default function FirePage() {
     [spending, swr, profile],
   );
 
-  if (!hydrated) return <p className="py-20 text-center text-sm text-slate-400">Loading…</p>;
 
   const cardStyles: Record<string, string> = {
     lean: "border-emerald-300 dark:border-emerald-800",
