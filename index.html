@@ -1,0 +1,2224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tuesday Letters — correspondence from your future self</title>
+<meta name="description" content="A retirement planner disguised as letters from your future self. Edit your present; watch your future rewrite itself, sentence by sentence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   The Tuesday Letters — design language: correspondence, not dashboard
+   ============================================================ */
+:root{
+  --paper:#efe6d3;          /* the desk */
+  --paper-2:#faf4e6;        /* the letter */
+  --paper-3:#f3ecdb;        /* panels */
+  --paper-edge:#dccfb4;
+  --ink:#2c3a56;            /* ink blue */
+  --ink-soft:#54617c;
+  --ink-faded:#8d94a6;      /* struck-through, and letters past the change */
+  --text:#3b3426;           /* sans text on desk */
+  --text-soft:#6d6150;
+  --accent:#8a5a2b;         /* leather + brass */
+  --accent-2:#b08948;
+  --note:#7d6b50;           /* margin-note umber */
+  --good:#5d7a52;
+  --line:#d8cab0;
+  --shadow:0 1px 2px rgba(60,45,20,.10), 0 8px 28px rgba(60,45,20,.13);
+  --shadow-soft:0 1px 3px rgba(60,45,20,.10);
+  --serif:"Lora",Georgia,"Times New Roman",serif;
+  --sans:"Karla","Segoe UI",system-ui,-apple-system,sans-serif;
+  --radius:10px;
+}
+html[data-theme="lamp"]{
+  --paper:#221b12;
+  --paper-2:#2c2416;
+  --paper-3:#281f13;
+  --paper-edge:#3b2f1d;
+  --ink:#e7dabb;
+  --ink-soft:#c4b694;
+  --ink-faded:#867a5e;
+  --text:#e2d6b8;
+  --text-soft:#a89878;
+  --accent:#d9a85e;
+  --accent-2:#c79a52;
+  --note:#bca678;
+  --good:#a9bd8f;
+  --line:#473a24;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 32px rgba(0,0,0,.45);
+  --shadow-soft:0 1px 3px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  background-image:radial-gradient(ellipse 1200px 700px at 50% -10%, rgba(255,252,240,.5), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(120,90,40,.012) 3px 4px);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  min-height:100vh;
+}
+html[data-theme="lamp"] body{
+  background-image:radial-gradient(ellipse 900px 600px at 65% -5%, rgba(255,190,90,.10), transparent 60%);
+}
+button{font-family:var(--sans);cursor:pointer}
+input,select,textarea{font-family:var(--sans);color:var(--text)}
+a{color:var(--accent)}
+.hidden{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- shared controls ---------- */
+.btn{
+  background:var(--paper-3);
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:var(--radius);
+  padding:8px 14px;
+  font-size:14px;
+  font-weight:600;
+  box-shadow:var(--shadow-soft);
+  transition:transform .1s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+html[data-theme="lamp"] .btn.primary{background:var(--accent);color:#241b0d;border-color:var(--accent)}
+.btn.quiet{background:transparent;border-color:transparent;box-shadow:none;color:var(--text-soft)}
+.btn.quiet:hover{color:var(--text);transform:none}
+.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--accent-2);outline-offset:2px;
+}
+input[type="text"],input[type="number"],select,textarea{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:9px 12px;
+  font-size:16px;
+  width:100%;
+}
+textarea{font-family:var(--serif);line-height:1.65}
+
+/* ---------- intake ---------- */
+#intake{max-width:640px;margin:0 auto;padding:7vh 22px 60px;min-height:100vh;display:flex;flex-direction:column}
+.wordmark{
+  font-family:var(--serif);font-weight:600;letter-spacing:.4px;
+  font-size:20px;color:var(--text);
+}
+.wordmark .tue{color:var(--accent)}
+#intake .wordmark{margin-bottom:6vh}
+.step{animation:stepIn .45s ease both}
+@keyframes stepIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step h2{font-family:var(--serif);font-weight:500;font-size:clamp(24px,4.5vw,32px);line-height:1.25;margin:0 0 10px;color:var(--text)}
+.step .sub{color:var(--text-soft);margin:0 0 26px;font-size:15.5px;max-width:52ch}
+.step .fields{display:flex;flex-direction:column;gap:16px;margin-bottom:26px}
+.field label{display:block;font-size:13px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text-soft);margin-bottom:6px}
+.field .hint{font-size:13px;color:var(--text-soft);margin-top:5px}
+.field.invalid input{border-color:#b0633a}
+.field .err{font-size:13px;color:#a85a32;margin-top:5px}
+.step-nav{display:flex;gap:10px;align-items:center;margin-top:auto;padding-top:18px}
+.step-nav .spacer{flex:1}
+.dots{display:flex;gap:7px;margin:0 0 26px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .2s}
+.dots i.on{background:var(--accent)}
+.tilegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--paper-2);padding:14px 12px;text-align:left;
+  font-size:14.5px;font-weight:600;color:var(--text);
+  box-shadow:var(--shadow-soft);transition:all .12s ease;line-height:1.3;
+}
+.tile small{display:block;font-weight:400;color:var(--text-soft);margin-top:3px;font-size:12.5px}
+.tile[aria-pressed="true"]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+html[data-theme="lamp"] .tile[aria-pressed="true"]{background:var(--accent);color:#241b0d;border-color:var(--accent)}
+.tile[aria-pressed="true"] small{color:inherit;opacity:.75}
+.pickcount{font-size:13px;color:var(--text-soft);margin-top:12px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg .tile{flex:1;min-width:110px;text-align:center}
+
+/* ---------- envelope ---------- */
+#envelope{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center}
+.env-stage{perspective:1100px;margin:34px 0 26px}
+.env{
+  position:relative;width:min(360px,82vw);aspect-ratio:1.62;
+  background:linear-gradient(180deg,var(--paper-2),var(--paper-3));
+  border:1px solid var(--paper-edge);border-radius:6px;box-shadow:var(--shadow);
+  transition:transform .5s ease;
+}
+.env .flap{
+  position:absolute;inset:0 0 auto 0;height:54%;
+  background:linear-gradient(185deg,var(--paper-3),var(--paper-edge));
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;border-radius:6px 6px 0 0;
+  transition:transform .8s cubic-bezier(.6,0,.3,1);
+  box-shadow:inset 0 -1px 0 rgba(110,80,30,.25);
+  z-index:3;
+}
+.env .seal{
+  position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:44px;height:44px;border-radius:50%;z-index:4;
+  background:radial-gradient(circle at 35% 30%, #b3673b, #7e3f1d);
+  color:#f3e3c8;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:19px;font-weight:600;
+  box-shadow:0 2px 6px rgba(70,30,0,.4);
+  transition:opacity .4s ease;
+}
+.env .note{
+  position:absolute;left:8%;right:8%;bottom:10%;top:auto;height:64%;
+  background:var(--paper-2);border:1px solid var(--paper-edge);border-radius:4px;
+  z-index:1;transition:transform .9s cubic-bezier(.5,0,.2,1) .35s;
+  display:flex;align-items:flex-end;justify-content:center;
+  font-family:var(--serif);color:var(--ink);font-style:italic;font-size:14px;
+  padding-bottom:8px;overflow:hidden;
+}
+.env.open .flap{transform:rotateX(168deg)}
+.env.open .seal{opacity:0}
+.env.open .note{transform:translateY(-72%)}
+.env-addr{position:absolute;inset:auto 0 16%;z-index:2;font-family:var(--serif);color:var(--ink);font-size:15px;line-height:1.5}
+.env-addr small{display:block;color:var(--ink-soft);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+#envelope h2{font-family:var(--serif);font-weight:500;font-size:clamp(22px,4vw,30px);margin:0;max-width:24ch}
+#envelope .sub{color:var(--text-soft);max-width:50ch}
+
+/* ---------- desk layout ---------- */
+#desk{max-width:1240px;margin:0 auto;padding:14px 18px 40px}
+.topbar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:8px 0 14px;border-bottom:1px solid var(--line);margin-bottom:18px;
+}
+.topbar .spacer{flex:1}
+.topbar .btn{font-size:13px;padding:7px 11px}
+.returnmail{
+  margin:0 0 16px;padding:12px 16px;border:1px solid var(--line);
+  border-left:3px solid var(--accent);border-radius:8px;background:var(--paper-3);
+  font-size:14.5px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+}
+.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:26px;align-items:start}
+@media (max-width:920px){.layout{grid-template-columns:1fr}}
+
+/* ---------- the desk of levers ---------- */
+.panel{
+  background:var(--paper-3);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-soft);padding:16px;
+}
+.panel h3{
+  margin:0 0 4px;font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--text-soft);font-weight:700;
+}
+.panel .panel-sub{font-size:13px;color:var(--text-soft);margin:0 0 14px}
+.lever{padding:11px 0;border-top:1px dashed var(--line)}
+.lever:first-of-type{border-top:0}
+.lever .lhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lever label.lname{font-weight:700;font-size:14px}
+.lever .lval{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);font-size:14px;white-space:nowrap}
+.lever input[type="range"]{width:100%;margin:8px 0 0}
+.lever .lrow{display:flex;gap:8px;align-items:center;margin-top:8px}
+.lever .lrow input[type="number"]{padding:6px 8px;font-size:14px}
+.lever .lnote{font-size:12.5px;color:var(--text-soft);margin-top:6px}
+.switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.switch input{position:absolute;opacity:0}
+.switch .tr{
+  width:36px;height:20px;border-radius:20px;background:var(--line);
+  position:relative;transition:background .15s;flex:none;
+}
+.switch .tr::after{
+  content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
+  background:var(--paper-2);box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;
+}
+.switch input:checked + .tr{background:var(--accent)}
+.switch input:checked + .tr::after{left:18px}
+.switch input:focus-visible + .tr{outline:2px solid var(--accent-2);outline-offset:2px}
+.moodseg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:8px}
+.moodseg button{
+  flex:1;border:0;background:var(--paper-2);padding:8px 4px;font-size:13px;font-weight:600;color:var(--text-soft);
+  border-left:1px solid var(--line);
+}
+.moodseg button:first-child{border-left:0}
+.moodseg button[aria-pressed="true"]{background:var(--ink);color:var(--paper-2)}
+html[data-theme="lamp"] .moodseg button[aria-pressed="true"]{background:var(--accent);color:#241b0d}
+
+/* range styling — analog brass */
+input[type="range"]{-webkit-appearance:none;appearance:none;background:transparent;height:26px}
+input[type="range"]::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--accent-2),var(--line))}
+input[type="range"]::-moz-range-track{height:4px;border-radius:4px;background:var(--line)}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;margin-top:-7px;
+  background:radial-gradient(circle at 35% 30%, #e6c27a, #9a6d2c);
+  border:1px solid #7a5520;box-shadow:0 1px 3px rgba(60,40,0,.4);
+}
+input[type="range"]::-moz-range-thumb{
+  width:18px;height:18px;border-radius:50%;border:1px solid #7a5520;
+  background:radial-gradient(circle at 35% 30%, #e6c27a, #9a6d2c);box-shadow:0 1px 3px rgba(60,40,0,.4);
+}
+
+/* drawers */
+details.drawer{border-top:1px solid var(--line);margin-top:14px;padding-top:10px}
+details.drawer summary{
+  cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--text-soft);list-style:none;display:flex;align-items:center;gap:8px;
+}
+details.drawer summary::-webkit-details-marker{display:none}
+details.drawer summary::before{content:"";width:7px;height:7px;border-right:1.5px solid var(--text-soft);border-bottom:1.5px solid var(--text-soft);transform:rotate(-45deg);transition:transform .15s;flex:none}
+details.drawer[open] summary::before{transform:rotate(45deg)}
+.assume-grid{display:grid;grid-template-columns:1fr 86px;gap:8px 10px;align-items:center;margin-top:12px}
+.assume-grid label{font-size:13px;color:var(--text-soft)}
+.assume-grid input,.assume-grid select{padding:5px 8px;font-size:14px}
+.assume-note{font-size:12.5px;color:var(--text-soft);margin-top:12px;line-height:1.55}
+
+/* ---------- letter side ---------- */
+.letter-side{min-width:0}
+.dialbox{margin-bottom:18px}
+.dial-label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dial-label .now{font-family:var(--serif);font-size:19px;color:var(--text)}
+.dial-label .now b{color:var(--accent);font-size:26px;font-weight:600}
+.dial-label .changeyear{font-size:13px;color:var(--note);font-style:italic;font-family:var(--serif)}
+.dialtrack{position:relative;padding:2px 0 26px}
+.dialtrack input[type="range"]{width:100%}
+.ticks{position:absolute;left:9px;right:9px;top:30px;height:18px;pointer-events:none}
+.ticks i{position:absolute;top:0;width:1px;height:6px;background:var(--text-soft);opacity:.55}
+.ticks i.major{height:9px;opacity:.85}
+.ticks i span{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:10.5px;color:var(--text-soft)}
+.marker{position:absolute;top:-12px;translate:-50% 0;pointer-events:none;text-align:center}
+.marker .flag{width:2px;height:14px;margin:0 auto;background:var(--accent-2)}
+.marker .mlabel{font-size:10px;letter-spacing:.5px;color:var(--note);white-space:nowrap;font-style:italic;font-family:var(--serif)}
+.marker.change .flag{background:var(--note)}
+.overfund{
+  margin:0 0 16px;padding:10px 14px;font-family:var(--serif);font-style:italic;
+  color:var(--good);font-size:15px;border-left:3px solid var(--good);
+  background:color-mix(in srgb, var(--good) 7%, transparent);border-radius:0 8px 8px 0;
+}
+
+.letters-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.letters-wrap.split{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+.letterbox .boxlabel{
+  font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-soft);
+  font-weight:700;margin:0 0 8px 4px;
+}
+.letter{
+  position:relative;
+  background:var(--paper-2);
+  background-image:linear-gradient(180deg, rgba(255,255,255,.35), transparent 120px);
+  border:1px solid var(--paper-edge);
+  border-radius:4px;
+  box-shadow:var(--shadow);
+  padding:clamp(22px,4vw,42px) clamp(20px,4vw,46px) clamp(26px,4vw,40px);
+  font-family:var(--serif);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.85;
+}
+html[data-theme="lamp"] .letter{background-image:linear-gradient(180deg, rgba(255,210,130,.05), transparent 120px)}
+@media (min-width:1060px){
+  .letters-wrap:not(.split) .letter{padding-right:208px}
+}
+.letter.changed-ink{color:var(--ink-faded)}
+.letter.changed-ink .dateline, .letter.changed-ink .signoff{color:var(--ink-faded)}
+.letter .dateline{font-size:13.5px;color:var(--ink-soft);font-style:italic;margin:0 0 18px;letter-spacing:.3px}
+.letter p{margin:0 0 14px}
+.letter .signoff{margin-top:22px;font-style:italic;color:var(--ink-soft)}
+.letter .ps{margin-top:10px;font-size:14px;opacity:.8}
+.letter .stamp{
+  position:absolute;top:14px;right:16px;font-family:var(--sans);
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faded);
+  border:1px solid var(--ink-faded);border-radius:3px;padding:3px 7px;opacity:.7;transform:rotate(2deg);
+}
+.statline{font-size:13px;color:var(--text-soft);margin:9px 4px 0;line-height:1.5}
+.statline b{color:var(--text)}
+
+/* sentence rewrites */
+.sent{position:relative}
+del.was{
+  text-decoration:none;color:var(--ink-faded);position:relative;
+}
+del.was::after{
+  content:"";position:absolute;left:0;right:0;top:56%;height:1.6px;background:var(--ink-soft);
+  transform-origin:left center;transform:scaleX(0);
+  animation:penStrike .55s cubic-bezier(.55,.05,.45,.95) forwards;
+  border-radius:2px;opacity:.85;
+}
+ins.now{text-decoration:none;opacity:0;animation:inkIn .7s ease .42s forwards}
+@keyframes penStrike{to{transform:scaleX(1)}}
+@keyframes inkIn{from{opacity:0}to{opacity:1}}
+.mnote{
+  font-family:var(--sans);font-size:11.5px;line-height:1.45;color:var(--note);
+  font-style:italic;
+}
+@media (min-width:1060px){
+  .letters-wrap:not(.split) .mnote{
+    position:absolute;left:calc(100% + 14px);top:2px;width:172px;
+    border-left:2px solid var(--accent-2);padding-left:8px;
+    opacity:0;animation:inkIn .6s ease .55s forwards;
+  }
+}
+@media (max-width:1059px){
+  .mnote{display:block;margin:2px 0 8px;border-left:2px solid var(--accent-2);padding-left:8px;opacity:0;animation:inkIn .6s ease .55s forwards}
+}
+.letters-wrap.split .mnote{display:block;margin:2px 0 8px;border-left:2px solid var(--accent-2);padding-left:8px;opacity:0;animation:inkIn .6s ease .55s forwards}
+
+/* ---------- chart ---------- */
+.chartbox{margin-top:12px}
+.chartbox svg{width:100%;height:auto;display:block}
+.chart-cap{font-size:12.5px;color:var(--text-soft);margin-top:6px;line-height:1.5}
+
+/* ---------- overlays ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(38,28,12,.55);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;
+}
+html[data-theme="lamp"] .overlay{background:rgba(0,0,0,.65)}
+.modal{
+  background:var(--paper-3);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);max-width:680px;width:100%;max-height:88vh;overflow:auto;padding:24px;
+}
+.modal h3{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 6px;letter-spacing:0;text-transform:none;color:var(--text)}
+.modal .sub{color:var(--text-soft);font-size:14px;margin:0 0 16px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+
+/* reader */
+#reader .modal{max-width:760px;background:var(--paper)}
+.reader-head{display:flex;align-items:baseline;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+.reader-head .rage{font-family:var(--serif);font-size:30px;color:var(--accent);font-weight:600;min-width:120px}
+.reader-head .rbar{flex:1;height:3px;background:var(--line);border-radius:3px;overflow:hidden;min-width:120px}
+.reader-head .rbar i{display:block;height:100%;background:var(--accent-2);width:0%}
+#reader .letter{animation:shuffleIn .5s ease}
+@keyframes shuffleIn{from{opacity:0;transform:translateY(8px) rotate(.4deg)}to{opacity:1;transform:none}}
+
+/* postcard */
+#postcardModal canvas{width:100%;height:auto;border-radius:6px;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+
+footer.colophon{
+  max-width:1240px;margin:30px auto 0;padding:16px 18px 8px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--text-soft);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;
+}
+@media (max-width:640px){
+  .topbar .btn{font-size:12px;padding:6px 9px}
+  .letter{font-size:16px;line-height:1.8}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ======== ACT 1 · INTAKE ======== -->
+  <section id="intake" class="hidden" aria-label="Getting to know you">
+    <div class="wordmark">The <span class="tue">Tuesday</span> Letters</div>
+    <div class="dots" id="intakeDots" aria-hidden="true"></div>
+    <div id="intakeStep"></div>
+  </section>
+
+  <!-- ======== ACT 2 · THE ENVELOPE ======== -->
+  <section id="envelope" class="hidden" aria-label="A letter has arrived">
+    <div class="wordmark">The <span class="tue">Tuesday</span> Letters</div>
+    <h2 id="envTitle">Something arrived for you.</h2>
+    <p class="sub">Postmarked from a Tuesday a long way from here.</p>
+    <div class="env-stage">
+      <div class="env" id="envEl">
+        <div class="flap"></div>
+        <div class="seal" aria-hidden="true">T</div>
+        <div class="note" id="envPeek">…nothing happened today, and it was enough…</div>
+        <div class="env-addr" id="envAddr"></div>
+      </div>
+    </div>
+    <button class="btn primary" id="envOpenBtn">Break the seal</button>
+  </section>
+
+  <!-- ======== ACT 3 · THE DESK ======== -->
+  <section id="desk" class="hidden">
+    <div class="topbar">
+      <div class="wordmark">The <span class="tue">Tuesday</span> Letters</div>
+      <div class="spacer"></div>
+      <button class="btn" id="splitBtn" aria-pressed="false" title="Compare your first plan with the plan as it stands">Two futures</button>
+      <button class="btn" id="readerBtn" title="Read every letter from 60 to 95, in order">Read them in order</button>
+      <button class="btn" id="postcardBtn" title="A postcard from future you">Postcard</button>
+      <button class="btn" id="writebackBtn" title="Write a short letter to your future self">Write back</button>
+      <button class="btn quiet" id="themeBtn" aria-pressed="false" title="Lamplight">Lamplight</button>
+      <button class="btn quiet" id="resetBtn" title="Erase everything and start again">Start over</button>
+    </div>
+
+    <div class="returnmail hidden" id="returnMail"></div>
+
+    <main class="layout">
+      <aside class="desk-panel">
+        <div class="panel" aria-label="The rewrite desk">
+          <h3>The rewrite desk</h3>
+          <p class="panel-sub">Move a lever. Watch the letters rewrite themselves.</p>
+          <div id="levers"></div>
+          <details class="drawer" id="assumeDrawer">
+            <summary>Assumptions — every number, editable</summary>
+            <div id="assumeBody"></div>
+          </details>
+          <details class="drawer" id="chartDrawer">
+            <summary>For those who want the numbers</summary>
+            <div class="chartbox" id="chartBox"></div>
+          </details>
+        </div>
+      </aside>
+
+      <section class="letter-side">
+        <div class="dialbox panel" aria-label="The Dial of Years">
+          <div class="dial-label">
+            <div class="now">A Tuesday at <b id="dialAgeOut">74</b></div>
+            <div class="changeyear" id="changeYearOut"></div>
+          </div>
+          <div class="dialtrack">
+            <div id="dialMarkers"></div>
+            <input type="range" id="dial" min="60" max="95" step="1" value="74"
+              aria-label="The Dial of Years — choose an age to read a letter from"
+              aria-describedby="changeYearOut">
+            <div class="ticks" id="dialTicks" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="overfund hidden" id="overfundNote" role="note"></div>
+
+        <div class="letters-wrap" id="lettersWrap">
+          <div class="letterbox" id="boxBaseline" hidden>
+            <div class="boxlabel">The letters as they were — your first plan</div>
+            <article class="letter" id="letterBaseline" aria-label="Letter under your original plan"></article>
+            <div class="statline" id="statBaseline"></div>
+          </div>
+          <div class="letterbox">
+            <div class="boxlabel hidden" id="currentLabel">The letters as they are now</div>
+            <article class="letter" id="letterMain" aria-live="polite" aria-label="A letter from your future self"></article>
+            <div class="statline" id="statMain"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <span>An educational thought experiment, not financial advice.</span>
+      <span>Everything stays on this device. Nothing is sent anywhere.</span>
+    </footer>
+  </section>
+
+  <!-- overlays -->
+  <div class="overlay hidden" id="reader" role="dialog" aria-modal="true" aria-label="Reading the letters in order">
+    <div class="modal">
+      <div class="reader-head">
+        <div class="rage" id="readerAge"></div>
+        <div class="rbar"><i id="readerBar"></i></div>
+        <button class="btn" id="readerPause" aria-pressed="false">Pause</button>
+        <button class="btn quiet" id="readerClose">Close</button>
+      </div>
+      <article class="letter" id="readerLetter"></article>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="postcardModal" role="dialog" aria-modal="true" aria-label="A postcard from your future self">
+    <div class="modal">
+      <h3>A postcard from future you</h3>
+      <p class="sub">One line, one age, and the decision that made it possible.</p>
+      <canvas id="postcardCanvas" width="1200" height="750"></canvas>
+      <div class="modal-actions">
+        <button class="btn" id="postcardClose">Close</button>
+        <a class="btn primary" id="postcardSave" download="a-postcard-from-future-you.png" href="#">Save the postcard</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="writeback" role="dialog" aria-modal="true" aria-label="Write to your future self">
+    <div class="modal">
+      <h3 id="wbTitle">Write back</h3>
+      <p class="sub" id="wbSub">A few lines to the person who has been writing to you. They will keep it, and so will this page.</p>
+      <div id="wbReceived" class="hidden"></div>
+      <textarea id="wbText" rows="7" aria-label="Your letter to your future self" placeholder=""></textarea>
+      <div class="modal-actions">
+        <button class="btn quiet" id="wbClose">Not today</button>
+        <button class="btn primary" id="wbSave">Seal it</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+"use strict";
+/* ============================================================
+   The Tuesday Letters
+   A retirement planner disguised as correspondence.
+   Engine first, then the prose, then the desk.
+   ============================================================ */
+
+/* ---------- small utilities ---------- */
+const $ = (s, el) => (el || document).querySelector(s);
+const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const esc = (s) => String(s == null ? "" : s)
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+/* deterministic integer hash — the same inputs always pick the same sentences */
+function ihash(n) {
+  n = (n ^ 61) ^ (n >>> 16);
+  n = (n + (n << 3)) | 0;
+  n = n ^ (n >>> 4);
+  n = Math.imul(n, 0x27d4eb2d);
+  n = n ^ (n >>> 15);
+  return n >>> 0;
+}
+function strSeed(s) {
+  let h = 7;
+  for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0;
+  return h >>> 0;
+}
+function pick(arr, seed) { return arr[ihash(seed) % arr.length]; }
+
+const CURRENCIES = {
+  "INR": { sym: "₹", locale: "en-IN", code: "INR", name: "Indian rupee" },
+  "USD": { sym: "$", locale: "en-US", code: "USD", name: "US dollar" },
+  "EUR": { sym: "€", locale: "de-DE", code: "EUR", name: "Euro" },
+  "GBP": { sym: "£", locale: "en-GB", code: "GBP", name: "British pound" }
+};
+function fmtMoney(v, cur, opts) {
+  const c = CURRENCIES[cur] || CURRENCIES.INR;
+  try {
+    return new Intl.NumberFormat(c.locale, Object.assign({
+      style: "currency", currency: c.code, maximumFractionDigits: 0
+    }, opts || {})).format(Math.round(v));
+  } catch (e) { return c.sym + Math.round(v).toLocaleString(); }
+}
+function fmtMoneyShort(v, cur) {
+  const c = CURRENCIES[cur] || CURRENCIES.INR;
+  const a = Math.abs(v);
+  if (cur === "INR") {
+    if (a >= 1e7) return c.sym + (v / 1e7).toFixed(a >= 1e8 ? 0 : 1) + " Cr";
+    if (a >= 1e5) return c.sym + (v / 1e5).toFixed(a >= 1e6 ? 0 : 1) + " L";
+    if (a >= 1e3) return c.sym + (v / 1e3).toFixed(0) + "k";
+    return c.sym + Math.round(v);
+  }
+  if (a >= 1e6) return c.sym + (v / 1e6).toFixed(a >= 1e7 ? 0 : 1) + "M";
+  if (a >= 1e3) return c.sym + (v / 1e3).toFixed(0) + "k";
+  return c.sym + Math.round(v);
+}
+const THIS_YEAR = new Date().getFullYear();
+
+/* ============================================================
+   THE PROSE — every line written, none canned twice.
+   Bands: A Abundant · B Comfortable · C Careful · D Strained · E Critical
+   Phases: go (go-go) · slow (slow-go) · no (no-go)
+   Tokens: {P} partner-or-friend · {F} friend · {K} kid · {city} · {name}
+   ============================================================ */
+
+const JOYS = [
+  { id: "cooking",   label: "Cooking for people",  small: "the long recipes, the full table" },
+  { id: "garden",    label: "Gardening",           small: "soil under the fingernails" },
+  { id: "walks",     label: "Long walks",          small: "the same route, never the same" },
+  { id: "sport",     label: "Cricket or golf",     small: "playing, watching, umpiring" },
+  { id: "reading",   label: "Reading",             small: "a chapter a day, minimum" },
+  { id: "travel",    label: "Travel",              small: "trains, hills, the long December trip" },
+  { id: "music",     label: "Music",               small: "records, ragas, the radio" },
+  { id: "grandkids", label: "Grandkids",           small: "the visits, the calls, the chaos" },
+  { id: "tinker",    label: "Tinkering",           small: "fixing what others throw away" },
+  { id: "hosting",   label: "Hosting friends",     small: "the kettle always warm" },
+  { id: "cinema",    label: "Films & cinema",      small: "matinées and strong opinions" },
+  { id: "birds",     label: "Birds & mornings",    small: "tea outside at first light" }
+];
+
+const LUXURIES = [
+  { id: "eatingOut",   label: "Eating out",        small: "the table you don’t have to clear" },
+  { id: "coffee",      label: "Good coffee",        small: "beans, not powder" },
+  { id: "secondCar",   label: "The second car",     small: "freedom with two sets of keys" },
+  { id: "annualTrip",  label: "The annual trip",    small: "the one the year bends around" },
+  { id: "newBooks",    label: "Books bought new",   small: "the smell of a fresh spine" },
+  { id: "freshFlowers",label: "Fresh flowers",      small: "a vase that is never empty" }
+];
+
+/* --- vignettes: VIG[joy][phase][band] = [variants...] --- */
+const VIG = {
+cooking: {
+go: {
+A: ["I cooked for nine on Saturday and six again tonight — biryani that took the whole afternoon, because the afternoon was mine to spend, and {P} did the tasting with great seriousness."],
+B: ["Made the long version of dal makhani this evening; {F} turned up at seven with nothing but an appetite, which is the correct contribution."],
+C: ["Cooked a big pot of something economical and excellent tonight — the trick, it turns out, is patience, which I now hold in bulk."],
+D: ["I cook more and order in less these days; the maths prefers it, and the kitchen and I have come to an understanding."],
+E: ["Dinner was khichdi, made carefully. There is a way of cooking simple food with full attention that feels less like thrift and more like respect."]
+},
+slow: {
+A: ["The pressure cooker and I still perform on Tuesdays; this week it was {K}’s favourite, made in quantities that assume someone will drop in. Someone always does."],
+B: ["I cook slower now and the food has improved out of all proportion; {P} says the kitchen smells like patience being rewarded."],
+C: ["Tuesday is one-pot day — I plan the week’s vegetables on the back of an envelope and feel, briefly, like a quartermaster."],
+D: ["We eat simply, in the good sense and the other one; the spices do the heavy lifting the budget used to."],
+E: ["I still make the Sunday dal, on Tuesdays, in a smaller pot. Cooking is the one economy that never feels like one."]
+},
+no: {
+A: ["I directed the cooking from my chair like a conductor — the cook does the knife-work now, but the recipes are still mine, and so is the last word."],
+B: ["Someone comes in to help with meals three days a week; on Tuesdays we make the old recipes together and I pretend the supervision is necessary."],
+C: ["Cooking is mostly memory now — I talk {K} through the recipe on the phone, step by step, and dinner happens in two kitchens at once."],
+D: ["I manage tea and toast with full ceremony and leave the rest to the tiffin service; ceremony, I find, is the part that matters."],
+E: ["Meals come from the community kitchen most days. On Tuesdays I add my own tempering — mustard seeds in hot oil — so the food remembers where it is."]
+}
+},
+garden: {
+go: {
+A: ["Spent the morning rebuilding the back beds — we put in fruit trees this year, the slow kind, which is the most optimistic purchase a person can make."],
+B: ["The tomatoes have entered their arrogant phase. I gave a bagful to {F} and accepted praise on their behalf."],
+C: ["The garden earns its keep now — I counted, and this month it quietly covered half the vegetables. I have begun speaking to it with more respect."],
+D: ["The garden does the work the gym used to, and lately some of the work the market used to as well."],
+E: ["I grow what we actually eat — methi, chillies, one extravagant row of marigolds, because austerity should never get the flowerbed."]
+},
+slow: {
+A: ["I garden in the mornings and leave the heavy beds to the mali; we have reached the stage where the garden is mostly staff and I am mostly chairman."],
+B: ["Two hours in the garden, mostly supervising the bougainvillea, which needs no supervision and accepts none."],
+C: ["Moved the vegetable beds closer to the kitchen door — shorter trips, same harvest. The knees negotiated the deal; the tomatoes signed it."],
+D: ["The garden has shrunk to pots by the door, which I tell myself is concentration rather than retreat. The chillies, to be fair, agree."],
+E: ["I kept six pots when we moved; the rest went to neighbours. Six is enough to need me every morning, which I suspect was the point."]
+},
+no: {
+A: ["I sit out with tea while the mali works and we argue about the roses with the seriousness of cabinet ministers. The garden has never looked better; I take full credit."],
+B: ["The garden comes to the window now — {F} planted the new bed where I can see it from my chair, which is the kindest piece of landscaping I know."],
+C: ["I do the pots on the sill myself and leave the beds to younger knees. Basil, mostly. It asks little and gives daily."],
+D: ["The garden is down to what the window-boxes can hold. They bloomed anyway this week, with no regard for circumstances, which I found instructive."],
+E: ["One tulsi plant by the window. I water it every morning before anything else. Some economies you make; some you refuse."]
+}
+},
+walks: {
+go: {
+A: ["Did the long loop past the lake before breakfast — eleven kilometres, no particular reason, which is my favourite reason."],
+B: ["Walked to the market with {P} and bought too many tomatoes, as is tradition."],
+C: ["The morning walk has become a route of small economies — the cheaper sabziwala, the library, the park — and somehow it is the best hour of the day."],
+D: ["I walk everywhere now, partly by philosophy and partly by arithmetic. My doctor approves of the philosophy and asks no questions about the arithmetic."],
+E: ["The long walk costs nothing, which makes it the one extravagance I take daily, in both directions."]
+},
+slow: {
+A: ["Shorter walks now, but better ones — the slow circuit of the park with {F}, stopping wherever the conversation needs to sit down."],
+B: ["{P} and I do the evening round of the colony — half exercise, half census. We know whose gate squeaks and whose grandson got the job."],
+C: ["One good walk a day, mornings, before the heat — measured in benches now rather than kilometres, which is a better unit anyway."],
+D: ["I still do the morning round, slower; the bus covers what the legs decline. Between them they get me everywhere I need."],
+E: ["I walk to the temple and back, with a pause at the gate where the jasmine is. It is not a long walk. It is, however, mine."]
+},
+no: {
+A: ["Walked to the end of the lane and back with the new walker, which glides like the expensive model it is. No regrets were ordered and none have arrived."],
+B: ["A turn around the courtyard after breakfast, {K}’s old umbrella along for company. The body keeps shorter accounts now; we stay in credit."],
+C: ["To the gate and back twice a day, rain permitting. The physiotherapist calls it maintenance. I call it patrol."],
+D: ["The walk is to the corner and back now. I have learned to read it the way I used to read whole neighbourhoods."],
+E: ["I walk the corridor in the mornings, ten lengths, holding the rail and my standards. Both hold."]
+}
+},
+sport: {
+go: {
+A: ["Golf on Tuesday mornings, now that the course is half ours by attendance; my handicap has improved in exact proportion to my availability."],
+B: ["Sunday cricket with the colony team — I field at mid-off, where the running is optional — and Tuesday is for replaying it ball by ball with {F}."],
+C: ["I coach the society kids’ cricket on Tuesday evenings; it costs nothing and pays in full."],
+D: ["The club membership went last year, but the maidan is free and the bowling there is more honest anyway."],
+E: ["I watch the match at {F}’s place these days — better company, no subscription, and the commentary is ours."]
+},
+slow: {
+A: ["Nine holes, twice a week, with a caddy who has learned my excuses by heart and charges accordingly."],
+B: ["I umpire the kids’ matches now — the whites still fit, the decisions are final, and nobody runs me out."],
+C: ["Mostly I watch from the boundary these days, with opinions. The opinions have never been fitter."],
+D: ["Cricket happens on the radio while I do the accounts; the radio version is free and, frankly, better written."],
+E: ["The Test match plays on the neighbour’s television, tea at the interval. I bring the biscuits when I can and the analysis always."]
+},
+no: {
+A: ["The match came to me this week — the big screen {K} set up, the good chair, and a rotation of visitors who claim they come for the cricket."],
+B: ["I keep score from the armchair during the Tests, in the old notebook, in the old way. The handwriting wanders; the judgement does not."],
+C: ["The radio does the cricket and I do the remembering — every ground I ever stood on arrives with the commentary, free of charge."],
+D: ["Highlights at nine, tea at ten. I have traded the stadium for the window, and on good days the light is better here."],
+E: ["The boy from upstairs relays the score through the window when the radio sulks. Between us we miss nothing."]
+}
+},
+reading: {
+go: {
+A: ["Finished two novels this week and started a third out of pure greed; the new bookshop knows me by name and by weakness."],
+B: ["Tuesday is library-and-one-bought-book day — the buying is rationed, the reading is not."],
+C: ["The library and I are in a committed relationship now. I buy perhaps one book a month, and choose it like a jeweller."],
+D: ["I’ve gotten good at libraries, free shelves, long reservations. The reading list has never been longer or cheaper."],
+E: ["The library is two bus stops away and lends without judgement. I read more now than in any year I was paid to be busy."]
+},
+slow: {
+A: ["Re-reading the Russians this winter, in the good hardbacks, with the lamp on by four. There are worse empires to retire into."],
+B: ["The afternoon chapter has become non-negotiable; {P} guards it like a doctor’s appointment."],
+C: ["I read on the verandah till the light goes, then ration the lamp the way my grandmother did — habit, mostly, not hardship."],
+D: ["The reading is free, the chair is paid for, and the afternoons are long. Of my three assets, two are appreciating."],
+E: ["Large-print editions from the library van, two a fortnight. The driver and I hold strong opinions on detective fiction and exchange them in full."]
+},
+no: {
+A: ["{K} reads to me on Tuesdays over the video call, and I correct the pronunciation of names in books I have loved for sixty years. We both look forward to it; only one of us admits it."],
+B: ["An hour of reading after lunch while the house is quiet — slower now, with the good magnifier, but the sentences are in no hurry either."],
+C: ["Poems more than novels now; they fit the attention and repay the visit. The anthology {F} gave me has gone soft at the corners."],
+D: ["I re-read instead of buy — the shelf is a library where I know every ending and forgive them anyway."],
+E: ["One book at a time, from the trolley that comes round on Tuesdays. This week, a thriller. The nurse says I gasp at the right places."]
+}
+},
+travel: {
+go: {
+A: ["We booked the Kerala trip for December — the long one this time — and a week in the hills for no reason except that the calendar looked empty and we are the calendar now."],
+B: ["The December trip is booked, second-tier hotels and first-tier company; we travel slower now and see roughly double."],
+C: ["One real trip a year is the deal — chosen slowly, savoured twice: once in the planning, once on the train."],
+D: ["Travel is trains now, sleeper class, shoulder seasons. I said no to {F}’s Jaipur plan, and that one stung; the nearby hills received me kindly instead."],
+E: ["The trips are day trips now — the fort, the lake, the old quarter of our own city, which it turns out I had never actually seen."]
+},
+slow: {
+A: ["We winter by the sea these years, same hotel, same corner room; they keep the room and we keep the habit, and nobody apologises to anybody."],
+B: ["One unhurried trip a year now, somewhere two hours flat by train; the suitcase is smaller, the stays are longer, the returns are gentler."],
+C: ["We travel by invitation these days — a wedding here, {K}’s spare room there. The guest-room circuit, done with gratitude and good biscuits."],
+D: ["The annual trip has become the biennial trip, and the planning has expanded to fill the gap. I know the timetable to the coast by heart, against the day it’s needed."],
+E: ["I travel by atlas after dinner, a page a night. Tonight, the Konkan coast. The fare is imagination and the legroom is excellent."]
+},
+no: {
+A: ["The family came to me this year instead — eleven of them, four days, a full house run like a small festival. Travel, it turns out, can be delegated."],
+B: ["{K} drove me to the old hill temple for my birthday, the slow road, with stops. One trip a year, done properly, beats the ten I used to rush."],
+C: ["We go as far as the botanical garden now, first Tuesday of the month, by taxi, with a thermos. It is a small expedition and we treat it as one."],
+D: ["The travelling is mostly other people’s now — I am the address the postcards come to, and I run a tight harbour."],
+E: ["The window does the travelling — the monsoon arrives, festival lights go up, a wedding procession passes. I keep the log."]
+}
+},
+music: {
+go: {
+A: ["Bought the good speakers at last and have been working through every concert I ever missed; the neighbours have learned the ragas by osmosis and one of them thanked me."],
+B: ["Tuesday evenings are for the record collection, in order, with {P} objecting to my ordering. The objections are part of the programme."],
+C: ["Free concert at the university hall — third row, no ticket, full orchestra. I have a system, and the system has never failed."],
+D: ["I’ve gotten good at free concerts, temple music, the radio’s late programme. The expensive seats, I remember, mostly bought distance from the stage."],
+E: ["The harmonium came down from the loft this year. I play badly, daily, with enormous satisfaction, and it costs exactly nothing."]
+},
+slow: {
+A: ["A young sitar student comes on Tuesdays to play for an hour; I pay her properly and correct her timing for free. We both believe we have the better half of the deal."],
+B: ["The evening raga programme on the radio, lights low, tea precisely at the interval — a concert hall of one, with season tickets for life."],
+C: ["I sing with the colony bhajan group on Tuesdays. The harmonium is older than most of the members and we are all roughly in tune."],
+D: ["The records were sold; the radio remains. The radio, I have decided, is where the music lived all along."],
+E: ["The transistor on the sill, the old station, the seven o’clock programme. Some evenings {F} hums along over the wall and we call it a duet."]
+},
+no: {
+A: ["The musicians came to the house for my birthday — {K}’s doing — and played the raga I asked for, twice. There are cheques I have signed with far less pleasure."],
+B: ["An hour of music after dinner, the same twelve records in rotation. The collection has stopped growing and started deepening."],
+C: ["I listen with the good headphones {K} sent, eyes closed, and attend concerts from forty years ago — front row, no queue."],
+D: ["The radio stays on low all day now, an old friend with excellent manners and no fees."],
+E: ["In the evening someone down the corridor plays the flute, unevenly, beautifully. I leave my door open. It is the best free concert in {city}."]
+}
+},
+grandkids: {
+go: {
+A: ["The grandchildren were here all of last week — we built a dam in the garden, ruined two sets of clothes, and I have been instructed to keep the equipment ready for next month."],
+B: ["Your granddaughter called at four, mid-homework, requiring an expert opinion on dinosaurs. I gave testimony."],
+C: ["Tuesdays I collect the grandkids from school — my contribution to the household economy, paid in gossip and shared ice cream, strictly off the books."],
+D: ["The grandkids’ visits are the fixed point the month is arranged around; everything else negotiates."],
+E: ["I mind the grandchildren two afternoons a week — it saves {K} real money, and it earns me the kind of wealth that never shows up in statements."]
+},
+slow: {
+A: ["The grandchildren’s school break was spent here, by tradition and by treaty; I funded the expedition and was carried along as cargo and historian."],
+B: ["Sunday’s call with the grandchildren ran long; {K}’s eldest is teaching me chess, and I am teaching them to lose with style."],
+C: ["I write the grandkids one letter a month, on paper, with stamps; it costs almost nothing, and they will keep them longer than anything else I could leave."],
+D: ["The grandchildren visit and audit the biscuit tin; grandparenting is the one account where I remain extravagantly solvent."],
+E: ["The grandkids came Sunday with {K}; we played cards for matchsticks and I lost a fortune, which is the only kind I can currently afford to lose."]
+},
+no: {
+A: ["The newest great-grandchild was brought round for inspection on Tuesday. I held court from the good chair and approved of everything."],
+B: ["The grandchildren visited — they do the talking now and I do the marvelling, which is the correct division of labour at this end of things."],
+C: ["A drawing arrived from the youngest, addressed to me in six colours. It has been framed by the simple method of sellotape and pride."],
+D: ["The grandkids call on Tuesdays. The phone is old and the line is patchy, but my name in their voices comes through in any weather."],
+E: ["{K} brings the children once a month. We sit on the bed and they show me their world inside a phone, and for an hour the room is the biggest place in {city}."]
+}
+},
+tinker: {
+go: {
+A: ["The workshop got its lathe at last — overkill, said {P}; investment, said I. The new garden gate has since settled the argument in my favour."],
+B: ["Fixed the neighbour’s mixer, the society’s gate latch, and a radio that only needed confidence. Tuesday well spent."],
+C: ["The repair bench paid rent this month — two stools recaned, one fee waived for a friend, one accepted with dignity."],
+D: ["I fix things now instead of replacing them, and have discovered the things mostly agree to it."],
+E: ["Nothing in this house gets thrown out without an interview. Most things confess to one loose screw and go on to live useful lives."]
+},
+slow: {
+A: ["Restoring the old gramophone this month, with parts couriered from three cities; it is a foolish expense and it sounds like 1962, which was the entire point."],
+B: ["The drawer of saved screws finally justified itself: the table fan from {K}’s childhood turns again, at its original speed, with its original noise."],
+C: ["I mend on Tuesdays — hems, plugs, chair legs. The pension does the big sums; I look after the small dignities."],
+D: ["The toolbox earns its keep weekly now. Between what I can fix and what we can do without, the gaps have grown narrow enough to step over."],
+E: ["I sharpen knives for the lane on Tuesdays — a few coins, much conversation. A person with a whetstone is never entirely without standing."]
+},
+no: {
+A: ["I run repairs by committee now — I diagnose from the chair, the hired help operates, and the household runs like a serviced engine."],
+B: ["My hands do less but the eye is sharper than ever; I talked the electrician through the fault and he had the grace to look impressed."],
+C: ["The watches get wound on Tuesdays, each one, in order. Maintenance — of them, and of me."],
+D: ["I keep the small tools in the bedside drawer and fix what passes within reach. This week, {P}’s reading glasses. Triumph."],
+E: ["I showed the boy from the second floor how to solder. The kit was mine; the hands are his now. Knowledge is the one tool that never needs oiling."]
+}
+},
+hosting: {
+go: {
+A: ["Fourteen at the table on Saturday, and the good crockery out on a Tuesday for six more; the house has decided it is a restaurant and I have decided not to argue."],
+B: ["{F} and two others came for dinner — we ate on the terrace and solved the country’s problems by ten, leaving, as usual, no notes."],
+C: ["The Tuesday open-house has shrunk to one pot and grown in attendance; it turns out nobody ever came for the menu."],
+D: ["We host potluck now — everyone brings a dish and the dignity stays mine. The table has never been fuller."],
+E: ["Tea is the entertaining budget these days, and the verandah the venue. Attendance, I note for the record, has not fallen."]
+},
+slow: {
+A: ["The first-Tuesday dinners continue, catered now, which I regard not as surrender but as delegation with gravy."],
+B: ["Four old friends, one long lunch, no agenda; we have reached the age where the gossip is mostly medical and still excellent."],
+C: ["Card night at ours on Tuesdays — the stakes are pennies, the snacks are homemade, and the accusations of cheating are priceless and mutual."],
+D: ["The dining table seats eight and we are usually three, but the three are the right three, and the kettle does not know the difference."],
+E: ["{F} comes on Tuesdays. I make the tea, they bring the biscuits — an arrangement neither of us has ever named aloud, which is how the best ones work."]
+},
+no: {
+A: ["I receive on Tuesday afternoons like an embassy: visitors announced, tea served, honours distributed. {P} says I have become grand. I was always grand; I have merely stopped hiding it."],
+B: ["Two visitors today, properly fed; the kitchen help stayed an extra hour so the hosting could go on — which is, after all, what the money was always for."],
+C: ["Visitors come to me now — Tuesday is the known day, the chair is by the window, and the biscuit tin is maintained at strategic readiness."],
+D: ["Hosting is a smaller art now: one guest, one hour, the good cups. I have kept the good cups through everything, and this is why."],
+E: ["The door stays unlatched on Tuesday afternoons. Whoever comes, comes; the tea stretches. A full house was never about the house."]
+}
+},
+cinema: {
+go: {
+A: ["Tuesday matinées at the new place with the reclining seats — we see everything, even the bad ones, especially the bad ones; the reviews we write over dinner are the real show."],
+B: ["The Tuesday matinée is half price, which {P} treats as a moral victory regardless of need."],
+C: ["The film society runs Wednesdays at the old hall — a classic, a folding chair, and a discussion afterwards worth twice the membership."],
+D: ["The multiplex lost us to the film society’s projector and the library’s DVD shelf; the films, I find, did not notice the downgrade."],
+E: ["Old films on the late-night reruns, Tuesdays — the films of my twenties, free, which is fitting: they were the ones that made all the promises."]
+},
+slow: {
+A: ["We have a projector, a white wall, and a standing Tuesday invitation; the colony calls it the talkies, and the popcorn budget is officially unlimited."],
+B: ["Tuesday is film night at home — proper interval, proper tea — and we argue about the ending as if we could still be of use to the director."],
+C: ["One cinema outing a month, matinée, aisle seats; the rest is the library’s collection and a quilt with a distinguished service record."],
+D: ["The film society waived my subscription this year — services rendered, they said, for forty years of opinions. I have decided to be honoured rather than embarrassed."],
+E: ["{F}’s grandson loads films onto a pen drive for me, a month at a time. My film festival is curated by a sixteen-year-old and has never been better."]
+},
+no: {
+A: ["Screenings in the sitting room on Tuesdays, attendance by invitation, blankets provided; I introduce each film with remarks nobody asked for and everybody stays for."],
+B: ["An old film after lunch, curtains drawn — the faces of 1975 up on the screen, not a day older, the cheek of them."],
+C: ["We watch the classics in instalments now, twenty minutes at a stretch; a good film, like a good life, survives being taken slowly."],
+D: ["The tablet props up on the breakfast tray and the matinée comes to bed; reduced circumstances, front-row seats."],
+E: ["The common-room television does a film on Tuesdays. I arrive early, claim the good chair, and supply the dialogue from memory when the sound fails."]
+}
+},
+birds: {
+go: {
+A: ["Up at five for the wetland circuit with the new binoculars — overengineered, magnificent — and the year list passed two hundred without ceremony."],
+B: ["The Tuesday bird walk found the paradise flycatcher again; {F} claims the sighting, but the photograph is mine, and history is written by the photographer."],
+C: ["Dawn at the lake costs bus fare and repays it in herons. The binoculars are old; the birds, I notice, are new daily."],
+D: ["The bird walk is the one subscription that survived every cut, on account of being free and infinite."],
+E: ["Mornings I take my tea to the step and the sparrows take attendance. Whatever else has been let go, the dawn shift hasn’t."]
+},
+slow: {
+A: ["The balcony feeders have made ours the most fashionable address in the neighbourhood, if you are a sunbird; the seed bill is absurd and protected by statute."],
+B: ["Tea on the balcony at six, the regulars in order — bulbuls, then the mynas, then the barbet with no manners. The newspaper waits its turn."],
+C: ["I keep the bird diary daily now; pencil, patience, one good sighting a week. Cheap hobbies, I have found, are the ones that turn out bottomless."],
+D: ["The feeder runs on kitchen scraps and rationed seed, and the birds, bless their indifference, cannot tell the difference."],
+E: ["A pigeon has nested on the ledge and I have granted tenancy. Rent is collected in mornings; payment has been regular."]
+},
+no: {
+A: ["The bird bath was moved below my window — a small engineering project, with staff and ceremony — and the kingfisher inspected it on Tuesday, which I am taking as a knighthood."],
+B: ["From the window chair I keep the morning watch: the sunbird at seven, the barbet at eight, my tea throughout. The shift never changes and never repeats."],
+C: ["I know the window’s birds by voice now more than by sight; the ear, it turns out, is the last good pair of binoculars."],
+D: ["The sill gets the last of the rice, and the sparrows keep their side of the arrangement: arrive, argue, stay till the cup is empty."],
+E: ["There is a crow who knocks at nine with the confidence of a creditor. He is fed. The books, in this one respect, balance."]
+}
+}
+};
+
+/* --- the money-shadowed detail: one per letter, keyed to the chosen luxury and the band --- */
+const LUX_LINES = {
+eatingOut: {
+A: ["We ate out twice this week without consulting anything but our appetite; the account, when I finally looked, hadn’t noticed."],
+B: ["Dinner out on Tuesday, the mid-priced place with the good fish — booked without checking the account first, which still feels like a small luxury."],
+C: ["We still eat out, first Tuesday of the month, fixed menu, fixed joy; the ritual survived the budget by agreeing to terms."],
+D: ["Eating out has become a quarterly event with the planning of a state visit. The anticipation, I admit, improves the soup."],
+E: ["Restaurants are for being taken to now — birthdays, {K}’s visits. I order with care and enjoy without any."]
+},
+coffee: {
+A: ["The coffee comes from a small estate in Coorg now, ground fresh each morning with the seriousness of ritual; the indulgence has survived every review of the accounts, as it should."],
+B: ["I made coffee the slow way; we replaced the machine last year without checking the account first, which still feels like a small luxury."],
+C: ["The good coffee is down to one cup a day, taken seriously; the second cup is ordinary and knows its place."],
+D: ["The coffee is the cheaper blend now, cut with the good beans on Sundays — a treaty I negotiated with myself and largely honour."],
+E: ["Instant, most days. The good beans keep for guests and victories, and I have decided this counts as discipline, not defeat."]
+},
+secondCar: {
+A: ["Both cars sit in the drive, one of them frankly ornamental; I keep it the way other people keep a boat — for the principle of the thing."],
+B: ["The second car survives the annual should-we-sell-it conversation every year, on the strength of arguments that are nakedly sentimental and accepted as sound."],
+C: ["The second car went to {K} this year — call it succession rather than economy, though it was tidily both."],
+D: ["We sold the second car in March. Mostly I don’t mind; the bus goes everywhere I need."],
+E: ["The car went some years ago, and the scooter after it. The bus pass is the one membership I keep, and it is honoured everywhere."]
+},
+annualTrip: {
+A: ["The annual trip has become two — one for the family and one for myself — and the travel fund still ends the year unembarrassed."],
+B: ["The annual trip is booked for December — the long version this time, paid in full, with the spreadsheet’s blessing freely given."],
+C: ["The annual trip survives by travelling off season and taking the cheaper view; the sea, helpfully, is the same sea."],
+D: ["The annual trip is biennial now. On the off years I plan the on years, which is nearly half the pleasure and exactly none of the cost."],
+E: ["There is no trip this year. I keep the old tickets in the desk drawer — proof of journeys made, and a quiet manifesto for one more."]
+},
+newBooks: {
+A: ["The bookshop’s first-edition shelf has learned to telephone me when something arrives; some people my age buy horses."],
+B: ["One new hardback a month, full price, no guilt — the single budget line that has never once been questioned in committee."],
+C: ["New books arrive on birthdays, and as prizes I award myself for finishing the last one; the system is strict and frequently corrupt."],
+D: ["I buy books second-hand and lend them first-rate; the margins arrive pre-annotated by strangers, which I have come to regard as a bonus."],
+E: ["I haven’t bought a new book in two years, and the library has made sure I haven’t missed one either. Still, I miss the smell of a fresh spine, and I am not ashamed to say so."]
+},
+freshFlowers: {
+A: ["Fresh flowers in three rooms, changed twice a week, by standing order; the house smells like a decision to be happy."],
+B: ["Tuesday is flower-market day — one armful, seasonal, haggled over for form’s sake and carried home like a small parade."],
+C: ["One bunch a week, from the cheaper end of the flower line; marigolds mostly, which offer the best exchange rate on joy."],
+D: ["The flower budget went the way of such budgets, so I grow them now — the vase is never empty, merely seasonal."],
+E: ["The vase holds whatever the garden and the roadside offer — today, bougainvillea on loan from the neighbour’s wall. The room does not know the difference, and neither, finally, do I."]
+}
+};
+
+/* --- money lines that override the luxury line when life has just changed shape --- */
+const DOWNSIZE_LINES = {
+A: ["The new flat is half the size of the old house and twice as easy to love; the difference sits in the bank doing quiet, useful work."],
+B: ["We traded the big house for the smaller place near the park — fewer rooms, fewer ladders, and a cushion in the account that lets the small luxuries pass unexamined."],
+C: ["The smaller flat suits us; the sale of the house is what pays for the comfortable parts of careful."],
+D: ["Selling the house was the right sum at the right time, even if I still reach for light switches that are two houses ago."],
+E: ["The house went, and the flat is small, and the arithmetic finally stopped shouting. I miss the stairs exactly twice a year — at festival time, and in dreams."]
+};
+const MOVE_LINES = { /* renters who moved somewhere smaller */
+A: ["We moved to the smaller place by the park — not for the rent, though the rent noticed; mostly for the light, which is wasted on no one."],
+B: ["The new flat is smaller and the rent politer, and the difference each month goes quietly where differences should."],
+C: ["We moved two streets over into something smaller; the rent eased, the kettle made the journey safely, and careful got a little roomier."],
+D: ["The move to the smaller flat hurt for a fortnight and has paid for itself monthly ever since."],
+E: ["We moved again, smaller again. I have become good at making three rooms hold a whole life; it is a skill, and I no longer care that it was compulsory."]
+};
+const PURCHASE_LINES = {
+A: ["The big thing happened this year, paid outright, no flinching; the account absorbed it the way a lake absorbs a stone."],
+B: ["The big thing finally happened — budgeted for years, enjoyed in weeks, and the plan barely broke stride."],
+C: ["The big thing went through this year; we tightened elsewhere for a season, and the ledger has nearly forgiven us."],
+D: ["The big thing took its bite this year. Worth it — I keep saying so, and most days the arithmetic lets me."],
+E: ["The big thing cost what it cost; some spending is not for the ledger to judge. We are eating simply this year, and I regret nothing."]
+};
+const PARTTIME_LINES = {
+A: ["Two days a week I still consult — not for the money, the accountant assures me, though the money has not been refused."],
+B: ["The part-time work suits everyone: they get the grey hair, I get the structure, and Tuesday afternoons remain sovereign territory."],
+C: ["The two days of consulting keep the bridge between salary and pension carrying traffic; the other five belong to me, in writing."],
+D: ["I still go in twice a week. The work is light, the cheque is not large, and together they keep the sums on the right side of the line."],
+E: ["The part-time job is not optional, whatever I tell the neighbours; but it is dignified, it is near, and it ends at one o’clock."]
+};
+
+/* --- weather, by season --- */
+const WEATHER = {
+monsoon: [
+"It rained this morning in {city}, the soft kind.",
+"The monsoon arrived early and has been showing off all week; the gutters sing and the traffic repents.",
+"Rain since dawn — the steady, accountant’s rain that gets everything done by evening."
+],
+winter: [
+"Proper winter at last; {city} smells of woodsmoke and oranges, and everyone walks like they mean it.",
+"Cold this morning, the good kind — two shawls and unimpeachable tea.",
+"Fog till ten, then a shy sun; the day arrived late and apologised beautifully."
+],
+summer: [
+"High summer in {city}; the fans run their relay and the afternoon signs a truce with anyone who agrees to lie down.",
+"Hot today — mangoes-for-breakfast hot — and the curtains stayed drawn till five, like sensible people.",
+"The heat broke at dusk with ten minutes of wind that felt personally addressed."
+],
+mild: [
+"One of those mornings {city} does well — washed light, a breeze with no agenda.",
+"The weather has been kind all week, the sky doing its best work for free.",
+"Cool enough for the shawl, warm enough to argue about it."
+]
+};
+const SEASON_BY_MONTH = ["winter","winter","mild","summer","summer","monsoon","monsoon","monsoon","mild","mild","mild","winter"];
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+/* --- closing reflections (used to bring short letters up to weight) --- */
+const CLOSINGS = {
+A: ["Nothing happened today that money could have improved, which I believe is the technical definition of rich."],
+B: ["Nothing happened today, and it was enough. That is, in fact, the whole point."],
+C: ["We are careful, and the care has turned out to be a craft rather than a cage."],
+D: ["We are careful in a way that has become a personality."],
+E: ["The days are plain and I have stopped apologising to them; plain bread is still bread."]
+};
+
+/* --- sign-offs --- */
+const SIGNOFFS = {
+A: ["— You, at {age}. The future is funded; spend a little more of it on the present.",
+    "— You, at {age}. It turns out enough arrives early, if you send it ahead."],
+B: ["— You, at {age}. Funded by a decision you made in {startYear}.",
+    "— You, at {age}. Paid for, quietly, by the person reading this."],
+C: ["— You, at {age}. The margins are thin, but they are margins, and we mind them together.",
+    "— You, at {age}. Careful is a kind of comfortable, if you keep your humour about it."],
+D: ["— You, at {age}. I’m not unhappy. I just notice the edges of things now.",
+    "— You, at {age}. A little more set aside each month would reach me here, with time to spare."],
+E: ["— You, at {age}. I am managing, and I am telling you the truth: a different set of Tuesdays was available.",
+    "— You, at {age}. Be kind to the person reading this. They can still change my weather."]
+};
+
+/* --- letters from before retirement (the dial can reach back) --- */
+const PREWORK = {
+vignettes: [
+"Tuesday at the desk, the usual weather of meetings; I keep the calendar the way someone keeps a garden they intend, someday, to sit in.",
+"Work was work today — the good kind, in patches. At lunch I walked the long way back and practised being unhurried, for later."
+],
+trajectory: {
+A: ["The sums, when I run them on the train, run ahead of me and wait there, grinning; we could stop sooner than we ever planned, and lately the spreadsheet says so out loud."],
+B: ["The plan is on its rails — what we set aside each month leaves quietly before we can develop opinions about it, and the curve does the rest."],
+C: ["The savings and I are keeping pace, just; the projections come out tidy so long as nothing leans on them too hard."],
+D: ["I do the sums on the train some mornings, and they come out narrow — not impossible, narrow. A little more each month would change the weather at the far end of this."],
+E: ["The sums, when I am honest with them, do not reach; the far end of this is thinner than anyone at this desk suspects. It is fixable from where you sit. It will be much harder from where I am headed."]
+},
+countdown: [
+"{yearsLeft} more years of the commute, by the current plan; I have started noticing which colleagues talk about someday and which ones have a date.",
+"Retirement is pencilled in at {retireAge}. The pencil is mine — which is the part people forget."
+],
+signoff: {
+default: "— You, at {age}, still working. The letters after this one are the ones you can change.",
+worry: "— You, at {age}, still working. Whatever you do this year, I am the one who gets to keep it."
+}
+};
+
+/* --- the unsayable, said: over-funding --- */
+const OVERFUND_LINES = [
+"It crossed my mind at the market today: the maths supported stopping at {earliestAge}. You could afford more Tuesdays like this one, sooner — the letters would simply start earlier.",
+"I checked the old files for sport: the plan held from {earliestAge} onward. We worked years we had already paid for. Buy the good chair. Take the long trip. The letters can absorb it."
+];
+
+/* second variants for the money-shadow lines, so a meaningful change rewrites
+   the letter even when the funding band holds */
+const LUX_EXTRA = {
+eatingOut: {
+A: "Lunch out on a whim today, the long kind with dessert taken seriously; whim, I am pleased to report, remains within budget indefinitely.",
+B: "We have a standing Tuesday table at the small place on the corner; the bill arrives, is paid without drama, and the drama is saved for the dessert menu.",
+C: "Eating out is monthly now, and chosen with the care of a committee; the kitchen handles the rest of the calendar and has risen to the occasion.",
+D: "We split one good meal out a season and linger over it shamelessly; the waiter has learned to bring the bill late and the water often.",
+E: "I walk past the old restaurant on Tuesdays and read the menu in the window like correspondence from a former life. {F} says I should stop; I have no intention of stopping."
+},
+coffee: {
+A: "A second grinder arrived this week — a backup, allegedly; the household files this under prudence and everyone has agreed not to laugh.",
+B: "The coffee tin holds the good beans and is refilled before it empties, which I have decided is the entire definition of comfort.",
+C: "The good coffee happens on Sundays now and the anticipation has improved it; scarcity, lightly applied, is a kind of seasoning.",
+D: "The café habit became a thermos habit — same bench, same hour, a fraction of the price; the sparrows cannot tell the difference and have stopped raising it.",
+E: "I measure the good coffee out by the spoon and the month. It holds. So do I."
+},
+secondCar: {
+A: "Took the second car out just to keep it honest — no errand, no destination, a loop past the old office for the pleasure of not stopping.",
+B: "The second car passed its service with one repair, approved without ceremony; mobility, we have decided, is a budget line with tenure.",
+C: "The second car is now the only car, by design rather than defeat, and the driveway has never looked so reasonable.",
+D: "One car between us now, and a roster on the fridge that we negotiate like diplomats; the bus takes the overflow with perfect patience.",
+E: "I kept my licence renewed out of principle. The principle rides the bus with me, and we both look out the window."
+},
+annualTrip: {
+A: "We added a third trip this year purely because a train timetable looked beautiful; some decisions need no better paperwork.",
+B: "The December trip is paid for and the brochure lives on the table, being read aloud at intervals like scripture.",
+C: "This year’s trip is shorter and nearer and chosen to the last detail; we will wring a fortnight’s joy from five days, as is now our craft.",
+D: "We skipped the trip this year and sent the grandkids instead; the photographs arrived daily, which is travel of a kind, at a tenth of the fare.",
+E: "The trip fund became the medicine fund some years ago, quietly, the way rivers change course. I still keep the maps in the desk."
+},
+newBooks: {
+A: "Three new hardbacks this week, bought on sight; the to-be-read pile has achieved architectural significance and planning permission.",
+B: "The new hardback was waiting at the bookshop, wrapped, with my name on it; a small standing arrangement that has outlived several governments.",
+C: "I bought one new book this month and read it slowly, the way you eat something expensive; the library covered the rest of my appetites.",
+D: "New books arrive as gifts now, and I have become gracious about hinting; the wish list is public infrastructure.",
+E: "The bookshop knows me as a browser these days. I am treated kindly there, and I take my time, and I buy nothing, and we all pretend otherwise."
+},
+freshFlowers: {
+A: "The flower fellow now delivers without being asked, which means the house has standing orders older than some friendships.",
+B: "An armful of gladioli from the Tuesday market, slightly over budget, entirely over-justified by the window light at four o’clock.",
+C: "One bunch a week still, but I have learned the market’s rhythms — what is abundant is cheap, and what is cheap, arranged well, is abundant.",
+D: "The vase runs on the garden now, supplemented by what the municipality plants and does not count; I consider it a public-private partnership.",
+E: "A single stem on the table most weeks, bought from the cart for less than a bus fare. One flower, I have found, holds the whole argument."
+}
+};
+Object.keys(LUX_EXTRA).forEach(k => Object.keys(LUX_EXTRA[k]).forEach(b => LUX_LINES[k][b].push(LUX_EXTRA[k][b])));
+
+/* ============================================================
+   THE ENGINE — deterministic, monthly steps, real (inflation-adjusted) terms
+   ============================================================ */
+const BANDS = [
+  { key: "A", min: 1.30, name: "Abundant" },
+  { key: "B", min: 1.05, name: "Comfortable" },
+  { key: "C", min: 0.85, name: "Careful" },
+  { key: "D", min: 0.65, name: "Strained" },
+  { key: "E", min: -Infinity, name: "Critical" }
+];
+function bandOf(ratio) { return BANDS.find(b => ratio >= b.min); }
+
+const DEFAULT_ASSUME = {
+  preReal: 6,        // % real return before retirement
+  postReal: 4,       // % real return after retirement
+  salaryGrowth: 1,   // % real growth of salary (and of the monthly saving)
+  moodDelta: 1.5,    // ± on both returns for Cautious / Fortunate
+  lifestyle: 0,      // target monthly lifestyle cost in retirement, today’s money (set at intake)
+  goGoEnd: 75,       // go-go years end at this age
+  slowGoEnd: 85,     // slow-go years end at this age
+  horizon: 95,       // the plan must reach this age
+  slowMult: 80,      // slow-go lifestyle, % of target
+  noMult: 60,        // no-go lifestyle, % of target
+  hcSlow: 12,        // healthcare in slow-go, % of target lifestyle, monthly
+  hcNo: 30,          // healthcare in no-go, % of target lifestyle, monthly
+  partTimeFrac: 40   // part-time pay, % of current take-home
+};
+
+function moodAdjOf(mood, delta) {
+  return mood === "cautious" ? -delta : mood === "fortunate" ? +delta : 0;
+}
+function monthlyRate(annualPct) { return Math.pow(1 + annualPct / 100, 1 / 12) - 1; }
+
+function monthlyCost(plan, age) {
+  const A = plan.assume, L = plan.levers, base = A.lifestyle;
+  let cost;
+  if (age <= A.goGoEnd) cost = base;
+  else if (age <= A.slowGoEnd) cost = base * A.slowMult / 100 + base * A.hcSlow / 100;
+  else cost = base * A.noMult / 100 + base * A.hcNo / 100;
+  if (!plan.profile.own && L.downsizeOn && age >= L.downsizeAge) {
+    cost *= (1 - (L.moveSavePct || 12) / 100);   // renters: a smaller place trims the cost line
+  }
+  return cost;
+}
+function monthlyIncome(plan, age) {
+  const L = plan.levers, A = plan.assume;
+  if (L.partTimeOn && age >= L.retireAge && age < L.partTimeUntil) {
+    return plan.profile.income * A.partTimeFrac / 100;
+  }
+  return 0;
+}
+
+function simulate(plan, mood) {
+  const p = plan.profile, L = plan.levers, A = plan.assume;
+  const adj = moodAdjOf(mood, A.moodDelta);
+  const rPre = monthlyRate(A.preReal + adj);
+  const rPost = monthlyRate(A.postReal + adj);
+  const gSal = monthlyRate(A.salaryGrowth);
+  const startAge = p.age;
+  const months = Math.max(12, Math.round((A.horizon - startAge) * 12));
+  const downsizeM = (L.downsizeOn && p.own) ? Math.round((L.downsizeAge - startAge) * 12) : -1;
+  const purchaseM = L.purchaseOn ? Math.round((L.purchaseAge - startAge) * 12) : -1;
+
+  let bal = p.savings;
+  let contrib = L.monthly;
+  let depletionAge = null;
+  const balByAge = {};
+
+  for (let m = 0; m < months; m++) {
+    if (m % 12 === 0) balByAge[startAge + m / 12] = bal;
+    const ageNow = startAge + m / 12;
+    if (ageNow < L.retireAge) {
+      bal = bal * (1 + rPre) + contrib;
+      contrib *= (1 + gSal);
+    } else {
+      const net = monthlyCost(plan, ageNow) - monthlyIncome(plan, ageNow);
+      bal = bal * (1 + rPost) - net;
+      if (bal <= 0 && depletionAge === null) depletionAge = Math.floor(ageNow);
+    }
+    if (m === downsizeM) bal += L.downsizeAmount;
+    if (m === purchaseM) {
+      bal -= L.purchaseAmount;
+      if (bal <= 0 && depletionAge === null && ageNow >= L.retireAge) depletionAge = Math.floor(ageNow);
+    }
+  }
+  balByAge[startAge + Math.floor(months / 12)] = bal;
+
+  /* funding ratio per integer age:
+     annuitise (balance + PV of everything still to come) over the months left
+     to the horizon, and divide by that year’s lifestyle cost */
+  function ratioAt(a) {
+    const aa = clamp(Math.floor(a), Math.ceil(startAge), A.horizon - 1);
+    const target = Math.max(aa, Math.ceil(L.retireAge));
+    if (balByAge[target] === undefined) return ratioCore(A.horizon - 1);
+    return ratioCore(target);
+  }
+  function ratioCore(a) {
+    let W = balByAge[a];
+    if (W === undefined) return 0;
+    const n = Math.max(12, Math.round((A.horizon - a) * 12));
+    // PV of future part-time income
+    if (L.partTimeOn) {
+      for (let m = 0; m < n; m++) {
+        const ageM = a + m / 12;
+        const inc = monthlyIncome(plan, ageM);
+        if (inc > 0) W += inc / Math.pow(1 + rPost, m + 1);
+      }
+    }
+    if (L.downsizeOn && p.own && L.downsizeAge > a) {
+      W += L.downsizeAmount / Math.pow(1 + rPost, (L.downsizeAge - a) * 12);
+    }
+    if (L.purchaseOn && L.purchaseAge > a) {
+      W -= L.purchaseAmount / Math.pow(1 + rPost, (L.purchaseAge - a) * 12);
+    }
+    const sustainable = rPost > 1e-9
+      ? W * rPost / (1 - Math.pow(1 + rPost, -n))
+      : W / n;
+    const cost = monthlyCost(plan, a);
+    return cost > 0 ? sustainable / cost : 99;
+  }
+
+  let minRatio = Infinity;
+  for (let a = Math.ceil(L.retireAge); a < A.horizon; a++) {
+    const r = ratioCore(a);
+    if (balByAge[a] !== undefined && r < minRatio) minRatio = r;
+  }
+  if (!isFinite(minRatio)) minRatio = ratioCore(A.horizon - 1);
+
+  return { balByAge, depletionAge, ratioAt, minRatio, startAge };
+}
+
+/* the earliest retirement age at which the plan still holds to the horizon */
+function earliestRetireAge(plan, mood) {
+  const lo = Math.max(Math.floor(plan.profile.age) + 1, 45);
+  const hi = Math.floor(plan.assume.horizon) - 5;
+  for (let x = lo; x <= hi; x++) {
+    const trial = {
+      profile: plan.profile,
+      assume: plan.assume,
+      levers: Object.assign({}, plan.levers, {
+        retireAge: x,
+        partTimeOn: plan.levers.partTimeOn && plan.levers.partTimeUntil > x
+      })
+    };
+    const s = simulate(trial, mood);
+    if (s.depletionAge === null && s.minRatio >= 1.0) return x;
+  }
+  return null;
+}
+
+/* ============================================================
+   THE COMPOSER — a letter is slots; slots are sentences; sentences have causes
+   ============================================================ */
+function peopleOf(profile) {
+  const partner = (profile.partner || "").trim();
+  const kids = (profile.kids || []).filter(Boolean);
+  const friends = (profile.friends || []).filter(Boolean);
+  return {
+    P: partner || friends[0] || kids[0] || "the neighbour",
+    F: friends[0] || partner || kids[0] || "the neighbour",
+    K: kids[0] || friends[1] || friends[0] || partner || "the neighbour’s daughter",
+    city: (profile.city || "").trim() || "our part of town"
+  };
+}
+function fill(t, ctx) {
+  return t.replace(/\{(\w+)\}/g, (m, k) => (ctx[k] !== undefined && ctx[k] !== null) ? String(ctx[k]) : m);
+}
+function phaseOf(plan, age) {
+  if (age < plan.levers.retireAge) return "pre";
+  if (age <= plan.assume.goGoEnd) return "go";
+  if (age <= plan.assume.slowGoEnd) return "slow";
+  return "no";
+}
+function wordsIn(s) { return s.split(/\s+/).filter(Boolean).length; }
+
+function composeLetter(plan, age, sim, extras) {
+  extras = extras || {};
+  const p = plan.profile, L = plan.levers;
+  const ratio = sim.ratioAt(age);
+  const band = bandOf(ratio).key;
+  const phase = phaseOf(plan, age);
+  const seedBase = strSeed(p.name || "you") + age * 131;
+  const bucket = Math.max(0, Math.floor(clamp(ratio, 0, 8) * 20));
+  const calYear = THIS_YEAR + (age - Math.floor(p.age));
+  const month = MONTHS[ihash(seedBase + 5) % 12];
+  const season = SEASON_BY_MONTH[MONTHS.indexOf(month)];
+  const ctx = Object.assign({
+    name: p.name, age, startYear: THIS_YEAR, retireAge: L.retireAge,
+    yearsLeft: Math.max(1, L.retireAge - age),
+    earliestAge: extras.earliestAge || ""
+  }, peopleOf(p));
+
+  const slots = [];
+  const add = (id, text, kind) => slots.push({ id, text: fill(text, ctx), kind: kind || "body" });
+
+  const weather = pick(WEATHER[season], seedBase + 11);
+  add("open", "Dear " + p.name + " — " + weather, "open");
+
+  if (phase === "pre") {
+    add("v0", pick(PREWORK.vignettes, seedBase + 21));
+    add("v1", pick(PREWORK.trajectory[band], seedBase + 31));
+    add("v2", pick(PREWORK.countdown, seedBase + 41));
+    add("sign", (band === "D" || band === "E") ? PREWORK.signoff.worry : PREWORK.signoff.default, "sign");
+  } else {
+    const joys = (p.joys && p.joys.length ? p.joys : ["walks", "reading", "hosting"]);
+    const start = age % joys.length;
+    const order = joys.map((_, i) => joys[(start + i) % joys.length]);
+    const partTimeNow = L.partTimeOn && age >= L.retireAge && age < L.partTimeUntil;
+    const vCount = Math.min(3, order.length);
+    let vi = 0;
+    if (partTimeNow) { add("v0", PARTTIME_LINES[band][0]); vi = 1; }
+    for (; vi < vCount; vi++) {
+      const joy = order[vi];
+      const cell = (VIG[joy] && VIG[joy][phase] && VIG[joy][phase][band]) || VIG.walks[phase][band];
+      add("v" + vi, pick(cell, seedBase + 100 + vi));
+    }
+    if (extras.overfunded && ratio >= 1.30) {
+      add("extra", pick(OVERFUND_LINES, seedBase + 61));
+    }
+    // exactly one money-shadowed detail
+    let moneyArr;
+    if (L.purchaseOn && age >= L.purchaseAge && age < L.purchaseAge + 2 && L.purchaseAge >= L.retireAge) {
+      moneyArr = PURCHASE_LINES[band];
+    } else if (L.downsizeOn && age >= L.downsizeAge && age < L.downsizeAge + 3) {
+      moneyArr = (p.own ? DOWNSIZE_LINES : MOVE_LINES)[band];
+    } else {
+      moneyArr = LUX_LINES[p.luxury || "coffee"][band];
+    }
+    add("money", moneyArr[ihash(bucket * 17 + 3) % moneyArr.length], "money");
+
+    // closing reflection if the letter is still light; signoff flips with the fine bucket
+    let count = slots.reduce((n, s) => n + wordsIn(s.text), 0);
+    if (count < 132 && order.length > vCount) {
+      const joy = order[vCount];
+      const cell = (VIG[joy] && VIG[joy][phase] && VIG[joy][phase][band]) || VIG.reading[phase][band];
+      slots.splice(slots.findIndex(s => s.id === "money"), 0,
+        { id: "v3", text: fill(pick(cell, seedBase + 100 + vCount), ctx), kind: "body" });
+      count = slots.reduce((n, s) => n + wordsIn(s.text), 0);
+    }
+    if (count < 150) add("close", CLOSINGS[band][0]);
+    add("sign", SIGNOFFS[band][ihash(bucket * 33 + 7) % SIGNOFFS[band].length], "sign");
+    // the quiet admission of the machinery — and the guarantee that moving the
+    // savings or retirement lever always visibly rewrites the letter
+    add("ps", "P.S. The ink in these letters is the " + fmtMoney(L.monthly, p.currency) +
+      " a month you set aside, and the " + L.retireAge + " you circled on the calendar. Both are still yours to move.", "ps");
+
+    // keep the letter near its 120–180-word weight: trim the optional slots if it ran long
+    let total = slots.reduce((n, s) => n + wordsIn(s.text), 0);
+    if (total > 192) {
+      const ci = slots.findIndex(s => s.id === "close");
+      if (ci >= 0) { slots.splice(ci, 1); total = slots.reduce((n, s) => n + wordsIn(s.text), 0); }
+    }
+    if (total > 192) {
+      const vi3 = slots.findIndex(s => s.id === "v3");
+      if (vi3 >= 0) slots.splice(vi3, 1);
+    }
+  }
+
+  return {
+    slots, band, bandName: bandOf(ratio).name, ratio, phase, age,
+    dateline: "Tuesday, " + month + " " + calYear + (p.city ? " · " + p.city : ""),
+    calYear
+  };
+}
+
+/* ============================================================
+   STATE & PERSISTENCE
+   ============================================================ */
+const LS_KEY = "tuesdayLetters.v1";
+let state = null;
+let prevMainLetter = null;          // for sentence diffs
+let sims = null, earliest = null, overfunded = false;
+
+function saveState() { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {} }
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(LS_KEY));
+    if (s && s.profile && s.profile.name) return s;
+  } catch (e) {}
+  return null;
+}
+function currentPlan() { return { profile: state.profile, levers: state.levers, assume: state.assume }; }
+function baselinePlan() { return { profile: state.profile, levers: state.baseline.levers, assume: state.baseline.assume }; }
+function cur() { return state.profile.currency; }
+
+function defaultLevers(profile, assume) {
+  return {
+    monthly: profile.monthly,
+    retireAge: profile.retireAge,
+    partTimeOn: false,
+    partTimeUntil: Math.min(profile.retireAge + 4, 80),
+    downsizeOn: false,
+    downsizeAge: clamp(profile.retireAge + 5, 60, 88),
+    downsizeAmount: profile.own ? Math.round(assume.lifestyle * 120) : 0,
+    moveSavePct: 12,
+    purchaseOn: false,
+    purchaseAge: clamp(profile.retireAge + 2, profile.age + 1, 90),
+    purchaseAmount: Math.round(profile.income * 12),
+    mood: "expected"
+  };
+}
+function buildState(d) {
+  const assume = Object.assign({}, DEFAULT_ASSUME, { lifestyle: Math.round(d.income * 0.7) });
+  const profile = {
+    name: d.name, age: d.age, retireAge: d.retireAge,
+    income: d.income, savings: d.savings, monthly: d.monthly,
+    partner: d.partner, kids: d.kids, friends: d.friends,
+    city: d.city, own: d.own, joys: d.joys, luxury: d.luxury, currency: d.currency
+  };
+  const levers = defaultLevers(profile, assume);
+  return {
+    profile, levers, assume,
+    baseline: { levers: Object.assign({}, levers), assume: Object.assign({}, assume) },
+    ui: { age: clamp(d.retireAge + 7, Math.max(61, Math.floor(d.age) + 1), 90), theme: "paper", split: false },
+    writeback: null
+  };
+}
+
+/* ============================================================
+   ACT 1 — INTAKE AS CONVERSATION
+   ============================================================ */
+const draft = { kids: [], friends: [], joys: [], own: true, currency: "INR" };
+let stepIdx = 0;
+
+const STEPS = [
+  {
+    title: "First — what should the letters call you?",
+    sub: "Your future self writes exactly the way you do, so the salutation matters.",
+    body: () => `<div class="field"><label for="inName">Your name</label>
+      <input id="inName" type="text" autocomplete="given-name" value="${esc(draft.name || "")}" placeholder="Priya"></div>`,
+    collect: () => {
+      draft.name = $("#inName").value.trim();
+      return draft.name ? null : { id: "inName", msg: "The letters need a name to begin with." };
+    }
+  },
+  {
+    title: "How old are you now — and when do you plan to stop working?",
+    sub: "A plan, not a promise. You will get to move this lever later and watch what happens.",
+    body: () => `<div class="field"><label for="inAge">Your age today</label>
+        <input id="inAge" type="number" inputmode="numeric" min="18" max="80" value="${draft.age || ""}" placeholder="38"></div>
+      <div class="field"><label for="inRetire">Retiring at</label>
+        <input id="inRetire" type="number" inputmode="numeric" min="40" max="90" value="${draft.retireAge || ""}" placeholder="60"></div>`,
+    collect: () => {
+      const a = Math.round(+$("#inAge").value), r = Math.round(+$("#inRetire").value);
+      if (!a || a < 18 || a > 80) return { id: "inAge", msg: "An age between 18 and 80, please." };
+      if (!r || r <= a || r > 90) return { id: "inRetire", msg: "Retirement should land after today and before 90." };
+      draft.age = a; draft.retireAge = r; return null;
+    }
+  },
+  {
+    title: "Which currency should the letters think in?",
+    sub: "This changes the formatting and nothing else. The arithmetic is agnostic.",
+    body: () => `<div class="seg" role="group" aria-label="Currency">` +
+      Object.keys(CURRENCIES).map(k =>
+        `<button type="button" class="tile cur-tile" data-cur="${k}" aria-pressed="${draft.currency === k}">
+          ${CURRENCIES[k].sym} <small>${esc(CURRENCIES[k].name)}</small></button>`).join("") + `</div>`,
+    wire: () => $$(".cur-tile").forEach(b => b.addEventListener("click", () => {
+      draft.currency = b.dataset.cur;
+      $$(".cur-tile").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    })),
+    collect: () => null
+  },
+  {
+    title: "The honest numbers, quickly.",
+    sub: "Monthly figures, after tax. Everything stays on this device — nothing is sent anywhere, ever.",
+    body: () => `<div class="field"><label for="inIncome">Monthly take-home</label>
+        <input id="inIncome" type="number" inputmode="numeric" min="0" value="${draft.income || ""}" placeholder="150000"></div>
+      <div class="field"><label for="inSavings">Saved &amp; invested so far, total</label>
+        <input id="inSavings" type="number" inputmode="numeric" min="0" value="${draft.savings ?? ""}" placeholder="2500000">
+        <div class="hint">Everything that is for the long run — funds, deposits, retirement accounts.</div></div>
+      <div class="field"><label for="inMonthly">Put away each month</label>
+        <input id="inMonthly" type="number" inputmode="numeric" min="0" value="${draft.monthly ?? ""}" placeholder="30000"></div>`,
+    collect: () => {
+      const i = +$("#inIncome").value, s = +$("#inSavings").value, m = +$("#inMonthly").value;
+      if (!(i > 0)) return { id: "inIncome", msg: "The letters can keep a secret, but not from themselves." };
+      if (!(s >= 0)) return { id: "inSavings", msg: "Zero is an honest answer too." };
+      if (!(m >= 0)) return { id: "inMonthly", msg: "Zero is an honest answer too." };
+      if (m > i) return { id: "inMonthly", msg: "Saving more than you earn is admirable and impossible." };
+      draft.income = i; draft.savings = s; draft.monthly = m; return null;
+    }
+  },
+  {
+    title: "Who is in your life?",
+    sub: "These exact names will appear inside the letters. Leave blank whatever doesn’t apply.",
+    body: () => `<div class="field"><label for="inPartner">A partner</label>
+        <input id="inPartner" type="text" value="${esc(draft.partner || "")}" placeholder="Arun"></div>
+      <div class="field"><label for="inKids">Kids — separate names with commas</label>
+        <input id="inKids" type="text" value="${esc((draft.kids || []).join(", "))}" placeholder="Meera, Dev"></div>
+      <div class="field"><label for="inFriends">Close friends — the ones who will still drop by</label>
+        <input id="inFriends" type="text" value="${esc((draft.friends || []).join(", "))}" placeholder="Asha, Ravi"></div>`,
+    collect: () => {
+      const split = v => v.split(",").map(s => s.trim()).filter(Boolean).slice(0, 4);
+      draft.partner = $("#inPartner").value.trim();
+      draft.kids = split($("#inKids").value);
+      draft.friends = split($("#inFriends").value);
+      return null;
+    }
+  },
+  {
+    title: "Where is home?",
+    sub: "The weather in the letters will be your weather.",
+    body: () => `<div class="field"><label for="inCity">Town or city</label>
+        <input id="inCity" type="text" value="${esc(draft.city || "")}" placeholder="Pune"></div>
+      <div class="seg" role="group" aria-label="Rent or own">
+        <button type="button" class="tile own-tile" data-own="1" aria-pressed="${draft.own}">We own it <small>or will, by then</small></button>
+        <button type="button" class="tile own-tile" data-own="0" aria-pressed="${!draft.own}">We rent <small>flexibility has its charms</small></button>
+      </div>`,
+    wire: () => $$(".own-tile").forEach(b => b.addEventListener("click", () => {
+      draft.own = b.dataset.own === "1";
+      $$(".own-tile").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    })),
+    collect: () => { draft.city = $("#inCity").value.trim(); return null; }
+  },
+  {
+    title: "Pick three to five ordinary joys.",
+    sub: "Not the highlight reel — the things an ordinary Tuesday could hold. The letters are built from these.",
+    body: () => `<div class="tilegrid" role="group" aria-label="Ordinary joys">` +
+      JOYS.map(j => `<button type="button" class="tile joy-tile" data-joy="${j.id}"
+        aria-pressed="${draft.joys.includes(j.id)}">${esc(j.label)}<small>${esc(j.small)}</small></button>`).join("") +
+      `</div><div class="pickcount" id="joyCount"></div>`,
+    wire: () => {
+      const upd = () => $("#joyCount").textContent =
+        draft.joys.length < 3 ? `Chosen ${draft.joys.length} — pick at least 3.` :
+        `Chosen ${draft.joys.length} of 5. Good Tuesdays ahead.`;
+      $$(".joy-tile").forEach(b => b.addEventListener("click", () => {
+        const id = b.dataset.joy, i = draft.joys.indexOf(id);
+        if (i >= 0) draft.joys.splice(i, 1);
+        else if (draft.joys.length < 5) draft.joys.push(id);
+        b.setAttribute("aria-pressed", draft.joys.includes(id) ? "true" : "false");
+        upd();
+      }));
+      upd();
+    },
+    collect: () => draft.joys.length >= 3 ? null : { id: null, msg: "Three joys minimum — Tuesdays are long." }
+  },
+  {
+    title: "And one ordinary luxury you’d hate to lose.",
+    sub: "This is the detail the money will be honest about, in every letter.",
+    body: () => `<div class="tilegrid" role="group" aria-label="One luxury">` +
+      LUXURIES.map(l => `<button type="button" class="tile lux-tile" data-lux="${l.id}"
+        aria-pressed="${draft.luxury === l.id}">${esc(l.label)}<small>${esc(l.small)}</small></button>`).join("") + `</div>`,
+    wire: () => $$(".lux-tile").forEach(b => b.addEventListener("click", () => {
+      draft.luxury = b.dataset.lux;
+      $$(".lux-tile").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    })),
+    collect: () => draft.luxury ? null : { id: null, msg: "Just one. The one that would sting." }
+  }
+];
+
+function renderIntake() {
+  const step = STEPS[stepIdx];
+  $("#intakeDots").innerHTML = STEPS.map((_, i) => `<i class="${i <= stepIdx ? "on" : ""}"></i>`).join("");
+  $("#intakeStep").innerHTML = `<div class="step">
+    <h2>${esc(step.title)}</h2><p class="sub">${esc(step.sub)}</p>
+    <div class="fields">${step.body()}</div>
+    <div class="err sr-only" id="stepErr" role="alert"></div>
+    <div class="step-nav">
+      ${stepIdx > 0 ? `<button class="btn" id="backBtn">Back</button>` : ""}
+      <div class="spacer"></div>
+      <button class="btn primary" id="nextBtn">${stepIdx === STEPS.length - 1 ? "Post the first letter" : "Continue"}</button>
+    </div></div>`;
+  if (step.wire) step.wire();
+  const first = $("#intakeStep input");
+  if (first) first.focus();
+  $$("#intakeStep input").forEach(inp => inp.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); $("#nextBtn").click(); }
+  }));
+  if ($("#backBtn")) $("#backBtn").addEventListener("click", () => { stepIdx--; renderIntake(); });
+  $("#nextBtn").addEventListener("click", () => {
+    const err = step.collect();
+    if (err) {
+      const box = $("#stepErr");
+      box.classList.remove("sr-only"); box.className = "err"; box.textContent = err.msg;
+      if (err.id && $("#" + err.id)) $("#" + err.id).focus();
+      return;
+    }
+    if (stepIdx < STEPS.length - 1) { stepIdx++; renderIntake(); }
+    else finishIntake();
+  });
+}
+
+function finishIntake() {
+  state = buildState(draft);
+  saveState();
+  showEnvelope();
+}
+
+/* ============================================================
+   ACT 2 — THE ENVELOPE
+   ============================================================ */
+function showEnvelope() {
+  $("#intake").classList.add("hidden");
+  $("#desk").classList.add("hidden");
+  $("#envelope").classList.remove("hidden");
+  const plan = currentPlan();
+  const sim = simulate(plan, state.levers.mood);
+  const letter = composeLetter(plan, state.ui.age, sim, {});
+  const money = letter.slots.find(s => s.kind === "money");
+  $("#envPeek").textContent = "…" + (money ? money.text.slice(0, 90) : "nothing happened today, and it was enough") + "…";
+  $("#envAddr").innerHTML = `<small>by patient post</small>${esc(state.profile.name)}<br><small>from ${letter.calYear} · a Tuesday</small>`;
+  $("#envTitle").textContent = "Something arrived for you, " + state.profile.name + ".";
+  const env = $("#envEl");
+  env.classList.remove("open");
+  $("#envOpenBtn").onclick = () => {
+    env.classList.add("open");
+    setTimeout(showDesk, 1150);
+  };
+}
+
+/* ============================================================
+   ACT 3 — THE DESK
+   ============================================================ */
+const MOODS = [
+  { id: "cautious", label: "Cautious" },
+  { id: "expected", label: "Expected" },
+  { id: "fortunate", label: "Fortunate" }
+];
+const MOOD_WORDS = { cautious: "unkind", expected: "ordinary", fortunate: "generous" };
+
+function showDesk() {
+  $("#intake").classList.add("hidden");
+  $("#envelope").classList.add("hidden");
+  $("#desk").classList.remove("hidden");
+  initDesk();
+  recompute(null);
+}
+
+function lever(id, html) { return `<div class="lever" id="lev-${id}">${html}</div>`; }
+
+function initDesk() {
+  const L = state.levers, P = state.profile;
+  const maxMonthly = Math.max(P.income, P.monthly * 2, 1000);
+  const step = Math.max(1, Math.round(maxMonthly / 200));
+  $("#levers").innerHTML =
+    lever("monthly", `
+      <div class="lhead"><label class="lname" for="lvMonthly">Saved each month</label><span class="lval" id="lvMonthlyOut"></span></div>
+      <input type="range" id="lvMonthly" min="0" max="${maxMonthly}" step="${step}" value="${L.monthly}" aria-label="Amount saved each month">`) +
+    lever("retire", `
+      <div class="lhead"><label class="lname" for="lvRetire">Retiring at</label><span class="lval" id="lvRetireOut"></span></div>
+      <input type="range" id="lvRetire" min="${P.age + 1}" max="80" step="1" value="${L.retireAge}" aria-label="Retirement age">`) +
+    lever("parttime", `
+      <div class="lhead"><label class="switch"><input type="checkbox" id="lvPartOn" ${L.partTimeOn ? "checked" : ""} aria-label="Work part-time after retiring"><span class="tr"></span><span class="lname">Part-time for a while</span></label><span class="lval" id="lvPartOut"></span></div>
+      <input type="range" id="lvPartUntil" min="${L.retireAge + 1}" max="85" step="1" value="${L.partTimeUntil}" aria-label="Work part-time until this age">
+      <div class="lnote">A couple of days a week, at ${state.assume.partTimeFrac}% of today’s pay (editable below).</div>`) +
+    lever("downsize", `
+      <div class="lhead"><label class="switch"><input type="checkbox" id="lvDownOn" ${L.downsizeOn ? "checked" : ""} aria-label="${P.own ? "Downsize the house" : "Move somewhere smaller"}"><span class="tr"></span><span class="lname">${P.own ? "Downsize the house" : "Move somewhere smaller"}</span></label><span class="lval" id="lvDownOut"></span></div>
+      <input type="range" id="lvDownAge" min="60" max="88" step="1" value="${L.downsizeAge}" aria-label="Age at which to ${P.own ? "downsize" : "move"}">
+      <div class="lrow">${P.own
+        ? `<input type="number" id="lvDownAmt" min="0" step="10000" value="${L.downsizeAmount}" aria-label="Amount the downsize frees up"><span class="lnote">freed&nbsp;up</span>`
+        : `<input type="number" id="lvMovePct" min="0" max="40" step="1" value="${L.moveSavePct}" aria-label="Percent the move trims from monthly costs"><span class="lnote">% off monthly costs</span>`}
+      </div>`) +
+    lever("purchase", `
+      <div class="lhead"><label class="switch"><input type="checkbox" id="lvBuyOn" ${L.purchaseOn ? "checked" : ""} aria-label="Plan a one-time big purchase"><span class="tr"></span><span class="lname">One big thing</span></label><span class="lval" id="lvBuyOut"></span></div>
+      <div class="lrow"><input type="number" id="lvBuyAmt" min="0" step="10000" value="${L.purchaseAmount}" aria-label="Cost of the big purchase">
+      <span class="lnote">at age</span><input type="number" id="lvBuyAge" min="${P.age + 1}" max="90" step="1" value="${L.purchaseAge}" style="max-width:84px" aria-label="Age of the big purchase"></div>
+      <div class="lnote">A wedding, a kitchen, a long trip — name it in your head; the ledger only needs the number.</div>`) +
+    lever("mood", `
+      <div class="lhead"><span class="lname" id="moodLbl">Market mood</span></div>
+      <div class="moodseg" role="group" aria-labelledby="moodLbl">${MOODS.map(m =>
+        `<button type="button" data-mood="${m.id}" aria-pressed="${L.mood === m.id}">${m.label}</button>`).join("")}</div>
+      <div class="lnote">±${state.assume.moodDelta}% a year on every return, both before and after retiring.</div>`);
+
+  wireLevers();
+  initAssumptions();
+  initDial();
+  wireTopbar();
+  renderReturnMail();
+}
+
+function wireLevers() {
+  const L = state.levers, P = state.profile;
+  const on = (id, ev, fn) => $(id).addEventListener(ev, fn);
+
+  on("#lvMonthly", "input", e => {
+    const v = Math.round(+e.target.value);
+    const d = v - L.monthly;
+    if (!d) return;
+    L.monthly = v;
+    recompute(d > 0
+      ? `because you started saving ${fmtMoney(Math.abs(d), cur())} more each month in ${THIS_YEAR}`
+      : `because you eased the monthly saving by ${fmtMoney(Math.abs(d), cur())} from ${THIS_YEAR}`);
+  });
+  on("#lvRetire", "input", e => {
+    const v = Math.round(+e.target.value);
+    const d = v - L.retireAge;
+    if (!d) return;
+    L.retireAge = v;
+    L.partTimeUntil = Math.max(L.partTimeUntil, v + 1);
+    $("#lvPartUntil").min = v + 1;
+    recompute(d > 0
+      ? `because you gave it ${d} more working ${d === 1 ? "year" : "years"}`
+      : `because you chose to stop at ${v}`);
+  });
+  on("#lvPartOn", "change", e => {
+    L.partTimeOn = e.target.checked;
+    recompute(L.partTimeOn
+      ? `because you kept a foot in the door until ${L.partTimeUntil}`
+      : "because you let the part-time work go");
+  });
+  on("#lvPartUntil", "input", e => {
+    const v = Math.round(+e.target.value);
+    if (v === L.partTimeUntil) return;
+    L.partTimeUntil = v;
+    if (!L.partTimeOn) { renderLeverVals(); return; }
+    recompute(`because the part-time years now run to ${v}`);
+  });
+  on("#lvDownOn", "change", e => {
+    L.downsizeOn = e.target.checked;
+    recompute(L.downsizeOn
+      ? (P.own ? `because the big house becomes someone else’s at ${L.downsizeAge}` : `because you planned the move to a smaller place at ${L.downsizeAge}`)
+      : (P.own ? "because the house stays" : "because the move came off the list"));
+  });
+  on("#lvDownAge", "input", e => {
+    const v = Math.round(+e.target.value);
+    if (v === L.downsizeAge) return;
+    L.downsizeAge = v;
+    if (!L.downsizeOn) { renderLeverVals(); return; }
+    recompute(P.own ? `because the house is sold at ${v} instead` : `because the move happens at ${v} instead`);
+  });
+  if (P.own) on("#lvDownAmt", "change", e => {
+    L.downsizeAmount = Math.max(0, Math.round(+e.target.value || 0));
+    if (L.downsizeOn) recompute(`because the downsize frees ${fmtMoney(L.downsizeAmount, cur())}`);
+  });
+  else on("#lvMovePct", "change", e => {
+    L.moveSavePct = clamp(Math.round(+e.target.value || 0), 0, 40);
+    if (L.downsizeOn) recompute(`because the smaller place trims costs by ${L.moveSavePct}%`);
+  });
+  on("#lvBuyOn", "change", e => {
+    L.purchaseOn = e.target.checked;
+    recompute(L.purchaseOn
+      ? `because of the ${fmtMoney(L.purchaseAmount, cur())} you set aside for the big thing at ${L.purchaseAge}`
+      : "because the big thing came off the list");
+  });
+  on("#lvBuyAmt", "change", e => {
+    L.purchaseAmount = Math.max(0, Math.round(+e.target.value || 0));
+    if (L.purchaseOn) recompute(`because the big thing now costs ${fmtMoney(L.purchaseAmount, cur())}`);
+  });
+  on("#lvBuyAge", "change", e => {
+    L.purchaseAge = clamp(Math.round(+e.target.value || P.age + 1), P.age + 1, 90);
+    e.target.value = L.purchaseAge;
+    if (L.purchaseOn) recompute(`because the big thing moves to age ${L.purchaseAge}`);
+  });
+  $$(".moodseg button").forEach(b => b.addEventListener("click", () => {
+    if (L.mood === b.dataset.mood) return;
+    L.mood = b.dataset.mood;
+    $$(".moodseg button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    recompute(`because you let the markets be ${MOOD_WORDS[L.mood]}`);
+  }));
+}
+
+function renderLeverVals() {
+  const L = state.levers;
+  $("#lvMonthlyOut").textContent = fmtMoney(L.monthly, cur()) + "/mo";
+  $("#lvRetireOut").textContent = "age " + L.retireAge;
+  $("#lvPartOut").textContent = L.partTimeOn ? "until " + L.partTimeUntil : "off";
+  $("#lvDownOut").textContent = L.downsizeOn ? "at " + L.downsizeAge : "off";
+  $("#lvBuyOut").textContent = L.purchaseOn ? fmtMoneyShort(L.purchaseAmount, cur()) + " at " + L.purchaseAge : "off";
+}
+
+/* ---------- assumptions drawer ---------- */
+const ASSUME_FIELDS = [
+  ["preReal",     "Real return while working, %/yr", 0, 12, 0.1],
+  ["postReal",    "Real return after retiring, %/yr", 0, 10, 0.1],
+  ["moodDelta",   "Market mood swing, ±%/yr", 0, 4, 0.1],
+  ["salaryGrowth","Real growth of salary & saving, %/yr", 0, 6, 0.1],
+  ["lifestyle",   "Target lifestyle in retirement, monthly", 0, 99999999, 1],
+  ["goGoEnd",     "Go-go years end at age", 65, 85, 1],
+  ["slowGoEnd",   "Slow-go years end at age", 75, 92, 1],
+  ["horizon",     "The plan must reach age", 85, 100, 1],
+  ["slowMult",    "Slow-go lifestyle, % of target", 40, 100, 1],
+  ["noMult",      "No-go lifestyle, % of target", 30, 100, 1],
+  ["hcSlow",      "Healthcare in slow-go, % of target", 0, 60, 1],
+  ["hcNo",        "Healthcare in no-go, % of target", 0, 90, 1],
+  ["partTimeFrac","Part-time pay, % of today’s", 10, 80, 1]
+];
+function initAssumptions() {
+  const A = state.assume;
+  $("#assumeBody").innerHTML =
+    `<p class="assume-note">Stated plainly: everything is in today’s money. While you work, savings grow at
+    ${A.preReal}% a year above inflation; after you retire, ${A.postReal}%. Go-go years spend the full target,
+    slow-go ${A.slowMult}% plus ${A.hcSlow}% healthcare, no-go ${A.noMult}% plus ${A.hcNo}% healthcare.
+    Change anything; the letters will keep up.</p>
+    <div class="assume-grid">` +
+    ASSUME_FIELDS.map(([k, label, min, max, st]) =>
+      `<label for="as-${k}">${esc(label)}</label>
+       <input type="number" id="as-${k}" min="${min}" max="${max}" step="${st}" value="${A[k]}">`).join("") +
+    `<label for="as-currency">Currency</label>
+     <select id="as-currency">${Object.keys(CURRENCIES).map(k =>
+       `<option value="${k}" ${cur() === k ? "selected" : ""}>${CURRENCIES[k].sym} ${esc(CURRENCIES[k].name)}</option>`).join("")}</select>
+    </div>`;
+  ASSUME_FIELDS.forEach(([k, , min, max]) => {
+    $("#as-" + k).addEventListener("change", e => {
+      let v = +e.target.value;
+      if (!isFinite(v)) v = state.assume[k];
+      v = clamp(v, min, max);
+      e.target.value = v;
+      if (v === state.assume[k]) return;
+      state.assume[k] = v;
+      if (k === "horizon") state.assume.slowGoEnd = Math.min(state.assume.slowGoEnd, v - 1);
+      recompute("because you changed an assumption underneath everything");
+    });
+  });
+  $("#as-currency").addEventListener("change", e => {
+    state.profile.currency = e.target.value;
+    recompute(null); renderLeverVals(); saveState();
+  });
+}
+
+/* ---------- the dial of years ---------- */
+function dialMin() { return Math.max(60, Math.floor(state.profile.age) + 1); }
+function initDial() {
+  const d = $("#dial");
+  d.min = dialMin(); d.max = 95;
+  d.value = state.ui.age = clamp(state.ui.age, +d.min, 95);
+  const ticks = [];
+  for (let a = +d.min; a <= 95; a++) {
+    const pct = (a - d.min) / (95 - d.min) * 100;
+    const major = a % 5 === 0;
+    ticks.push(`<i class="${major ? "major" : ""}" style="left:${pct}%">${major ? `<span>${a}</span>` : ""}</i>`);
+  }
+  $("#dialTicks").innerHTML = ticks.join("");
+  d.addEventListener("input", () => {
+    state.ui.age = +d.value;
+    renderAll(null);
+  });
+}
+
+function dialMarkers() {
+  const min = dialMin(), span = 95 - min;
+  const pos = a => clamp((a - min) / span * 100, 0, 100);
+  const sim = sims[state.levers.mood];
+  let html = "";
+  const r = state.levers.retireAge;
+  if (r >= min && r <= 95) html += `<div class="marker" style="left:${pos(r)}%"><div class="mlabel">the last paycheque</div><div class="flag"></div></div>`;
+  if (sim.depletionAge && sim.depletionAge <= 95) {
+    html += `<div class="marker change" style="left:${pos(sim.depletionAge)}%"><div class="mlabel">the year the letters change</div><div class="flag"></div></div>`;
+  }
+  $("#dialMarkers").innerHTML = html;
+  $("#dial").setAttribute("aria-valuetext", "age " + state.ui.age +
+    (sim.depletionAge ? ", the letters change at " + sim.depletionAge : ""));
+}
+
+/* ============================================================
+   RECOMPUTE & RENDER
+   ============================================================ */
+function recompute(cause) {
+  const plan = currentPlan();
+  sims = {
+    expected: simulate(plan, "expected"),
+    cautious: simulate(plan, "cautious"),
+    fortunate: simulate(plan, "fortunate")
+  };
+  earliest = earliestRetireAge(plan, state.levers.mood);
+  overfunded = earliest !== null && earliest <= state.levers.retireAge - 2;
+  saveState();
+  renderAll(cause);
+}
+
+function bandShiftNote(prev, curL) {
+  if (!prev || prev.band === curL.band) return "";
+  return ` — this Tuesday moved from ${bandNameOf(prev.band)} to ${bandNameOf(curL.band)}.`;
+}
+function bandNameOf(key) { return BANDS.find(b => b.key === key).name; }
+
+function renderAll(cause) {
+  const plan = currentPlan();
+  const sim = sims[state.levers.mood];
+  const age = state.ui.age;
+  renderLeverVals();
+  dialMarkers();
+  $("#dialAgeOut").textContent = age;
+
+  const dep = sim.depletionAge;
+  $("#changeYearOut").textContent =
+    dep ? `the ink changes at ${dep}` :
+    sim.minRatio >= 1.30 ? "the ink never tightens" :
+    `the ink holds to ${state.assume.horizon}`;
+
+  const note = $("#overfundNote");
+  if (overfunded) {
+    note.classList.remove("hidden");
+    note.textContent = `You can afford more Tuesdays like this one, sooner. The math supports retiring at ${earliest}.`;
+  } else note.classList.add("hidden");
+
+  const letter = composeLetter(plan, age, sim, { overfunded, earliestAge: earliest });
+
+  const split = state.ui.split;
+  $("#boxBaseline").hidden = !split;
+  $("#currentLabel").classList.toggle("hidden", !split);
+  $("#lettersWrap").classList.toggle("split", split);
+
+  let prev = null, noteText = null;
+  if (split) {
+    const bSim = simulate(baselinePlan(), state.baseline.levers.mood || "expected");
+    const bLetter = composeLetter(baselinePlan(), age, bSim, {});
+    renderLetter($("#letterBaseline"), bLetter, null, null);
+    $("#statBaseline").innerHTML = statlineHTML(bLetter, bSim);
+    $("#letterBaseline").classList.toggle("changed-ink", !!(bSim.depletionAge && age >= bSim.depletionAge));
+    prev = bLetter;
+    noteText = "since your first plan";
+  } else if (cause && prevMainLetter && prevMainLetter.age === age) {
+    prev = prevMainLetter;
+    noteText = cause;
+  }
+  if (prev && noteText) noteText += bandShiftNote(prev, letter);
+
+  const changedCount = renderLetter($("#letterMain"), letter, prev, noteText);
+  $("#letterMain").classList.toggle("changed-ink", !!(dep && age >= dep));
+  let stat = statlineHTML(letter, sim);
+  if (cause && !split && prev && changedCount === 0) {
+    stat += ` · This Tuesday reads the same; the change shows up elsewhere on the dial.`;
+  }
+  $("#statMain").innerHTML = stat;
+
+  prevMainLetter = letter;
+  renderChart();
+}
+
+function statlineHTML(letter, sim) {
+  const dep = sim.depletionAge;
+  const horizon = state.assume.horizon;
+  let s = `This Tuesday reads <b>${esc(letter.bandName)}</b>`;
+  s += dep ? ` · the money runs thin near <b>${dep}</b>` : ` · the money holds past <b>${horizon}</b>`;
+  if (earliest !== null) s += ` · earliest workable retirement: <b>${earliest}</b>`;
+  return s;
+}
+
+/* render a letter; diff against prev if given; returns count of rewritten sentences */
+function renderLetter(el, letter, prev, noteText) {
+  const prevById = {};
+  if (prev) prev.slots.forEach(s => prevById[s.id] = s.text);
+  let changed = 0, noted = false;
+  const sentence = (slot) => {
+    const old = prev ? prevById[slot.id] : undefined;
+    if (prev && noteText && old !== undefined && old !== slot.text) {
+      changed++;
+      const n = !noted ? `<span class="mnote">${esc(noteText)}</span>` : "";
+      noted = true;
+      return `<span class="sent"><del class="was">${esc(old)}</del> <ins class="now">${esc(slot.text)}</ins>${n}</span>`;
+    }
+    return `<span class="sent">${esc(slot.text)}</span>`;
+  };
+  const open = letter.slots.find(s => s.kind === "open");
+  const sign = letter.slots.find(s => s.kind === "sign");
+  const ps = letter.slots.find(s => s.kind === "ps");
+  const body = letter.slots.filter(s => s !== open && s !== sign && s !== ps);
+  // sentences that vanished entirely still get struck through, once, at the end of the body
+  let ghosts = "";
+  if (prev && noteText) {
+    const curIds = new Set(letter.slots.map(s => s.id));
+    prev.slots.filter(s => !curIds.has(s.id) && s.kind === "body").forEach(s => {
+      changed++;
+      ghosts += ` <span class="sent"><del class="was">${esc(s.text)}</del></span>`;
+    });
+  }
+  el.innerHTML =
+    `<div class="stamp">posted ${letter.calYear}</div>` +
+    `<p class="dateline">${esc(letter.dateline)}</p>` +
+    `<p>${sentence(open)}</p>` +
+    `<p>${body.map(sentence).join(" ")}${ghosts}</p>` +
+    `<p class="signoff">${sentence(sign)}</p>` +
+    (ps ? `<p class="signoff ps">${sentence(ps)}</p>` : "");
+  return changed;
+}
+
+/* ============================================================
+   THE CHART — one elegant area, three moods as soft bands
+   ============================================================ */
+function renderChart() {
+  const A = state.assume, P = state.profile;
+  const a0 = Math.floor(P.age), a1 = A.horizon;
+  const series = m => {
+    const out = [];
+    for (let a = a0; a <= a1; a++) {
+      const v = sims[m].balByAge[a];
+      out.push([a, Math.max(0, v === undefined ? 0 : v)]);
+    }
+    return out;
+  };
+  const E = series("expected"), C = series("cautious"), F = series("fortunate");
+  const maxV = Math.max(1, ...F.map(p => p[1]), ...E.map(p => p[1]));
+  const W = 720, H = 260, ml = 56, mr = 12, mt = 14, mb = 30;
+  const x = a => ml + (a - a0) / (a1 - a0) * (W - ml - mr);
+  const y = v => mt + (1 - v / maxV) * (H - mt - mb);
+  const pts = s => s.map(p => x(p[0]).toFixed(1) + "," + y(p[1]).toFixed(1)).join(" ");
+  let grid = "", labels = "";
+  for (let a = Math.ceil(a0 / 5) * 5; a <= a1; a += 5) {
+    grid += `<line x1="${x(a)}" y1="${mt}" x2="${x(a)}" y2="${H - mb}" stroke="currentColor" stroke-opacity=".07"/>`;
+    labels += `<text x="${x(a)}" y="${H - 10}" font-size="10" text-anchor="middle" fill="currentColor" fill-opacity=".55">${a}</text>`;
+  }
+  for (let i = 1; i <= 3; i++) {
+    const v = maxV * i / 3;
+    grid += `<line x1="${ml}" y1="${y(v)}" x2="${W - mr}" y2="${y(v)}" stroke="currentColor" stroke-opacity=".07"/>`;
+    labels += `<text x="${ml - 6}" y="${y(v) + 3}" font-size="10" text-anchor="end" fill="currentColor" fill-opacity=".55">${esc(fmtMoneyShort(v, cur()))}</text>`;
+  }
+  const dep = sims.expected.depletionAge;
+  let depMark = "";
+  if (dep && dep <= a1) {
+    depMark = `<line x1="${x(dep)}" y1="${mt}" x2="${x(dep)}" y2="${H - mb}" stroke="currentColor" stroke-opacity=".5" stroke-dasharray="3 4"/>
+      <text x="${x(dep) + 4}" y="${mt + 12}" font-size="10" font-style="italic" fill="currentColor" fill-opacity=".7">the letters change</text>`;
+  }
+  const r = state.levers.retireAge;
+  const retMark = `<line x1="${x(r)}" y1="${H - mb}" x2="${x(r)}" y2="${H - mb - 8}" stroke="currentColor" stroke-opacity=".8" stroke-width="2"/>`;
+  $("#chartBox").innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Projected balance by age under three market moods" style="color:var(--text)">
+      ${grid}
+      <polygon points="${pts(C)} ${pts(F.slice().reverse())}" fill="var(--accent-2)" fill-opacity=".18"/>
+      <polyline points="${pts(E)}" fill="none" stroke="var(--accent)" stroke-width="2"/>
+      ${depMark}${retMark}${labels}
+    </svg>
+    <div class="chart-cap">${chartCaption()}</div>`;
+}
+function chartCaption() {
+  const e = sims.expected, c = sims.cautious, f = sims.fortunate, A = state.assume;
+  const peak = Math.max(...Object.values(e.balByAge));
+  const last = (s) => s.depletionAge ? `runs out near ${s.depletionAge}` : `holds past ${A.horizon}`;
+  return `Balance against age, in today’s money. Under <i>Expected</i> markets the line peaks near ${esc(fmtMoneyShort(peak, cur()))} and ${last(e)}; ` +
+    `<i>Cautious</i> ${last(c)}, <i>Fortunate</i> ${last(f)}. The soft band is the space between those tempers.`;
+}
+
+/* ============================================================
+   TOPBAR — two futures, reader, postcard, write-back, lamplight, reset
+   ============================================================ */
+function wireTopbar() {
+  $("#splitBtn").onclick = () => {
+    state.ui.split = !state.ui.split;
+    $("#splitBtn").setAttribute("aria-pressed", String(state.ui.split));
+    prevMainLetter = null;
+    saveState(); renderAll(null);
+  };
+  $("#themeBtn").onclick = () => {
+    state.ui.theme = state.ui.theme === "lamp" ? "paper" : "lamp";
+    applyTheme(); saveState();
+  };
+  $("#resetBtn").onclick = () => {
+    if (confirm("Burn the letters and start over? This clears everything saved on this device.")) {
+      try { localStorage.removeItem(LS_KEY); } catch (e) {}
+      location.reload();
+    }
+  };
+  $("#readerBtn").onclick = openReader;
+  $("#postcardBtn").onclick = openPostcard;
+  $("#writebackBtn").onclick = () => openWriteback(false);
+}
+function applyTheme() {
+  document.documentElement.dataset.theme = state.ui.theme === "lamp" ? "lamp" : "";
+  $("#themeBtn").setAttribute("aria-pressed", String(state.ui.theme === "lamp"));
+}
+
+/* ---------- read them in order: a shoebox of old mail, 45 seconds ---------- */
+let readerTimer = null;
+function openReader() {
+  const ages = [];
+  for (let a = dialMin(); a <= 95; a++) ages.push(a);
+  let i = 0;
+  const total = ages.length;
+  const show = () => {
+    const a = ages[i];
+    const sim = sims[state.levers.mood];
+    const letter = composeLetter(currentPlan(), a, sim, { overfunded, earliestAge: earliest });
+    $("#readerAge").textContent = "At " + a;
+    $("#readerBar").style.width = ((i + 1) / total * 100) + "%";
+    renderLetter($("#readerLetter"), letter, null, null);
+    $("#readerLetter").classList.toggle("changed-ink", !!(sim.depletionAge && a >= sim.depletionAge));
+  };
+  const stepMs = Math.max(900, Math.round(45000 / total));
+  const tick = () => { i++; if (i >= total) { stopReader(); return; } show(); };
+  $("#reader").classList.remove("hidden");
+  show();
+  readerTimer = setInterval(tick, stepMs);
+  $("#readerPause").setAttribute("aria-pressed", "false");
+  $("#readerPause").textContent = "Pause";
+  $("#readerPause").onclick = () => {
+    if (readerTimer) { clearInterval(readerTimer); readerTimer = null;
+      $("#readerPause").textContent = "Resume"; $("#readerPause").setAttribute("aria-pressed", "true"); }
+    else { readerTimer = setInterval(tick, stepMs);
+      $("#readerPause").textContent = "Pause"; $("#readerPause").setAttribute("aria-pressed", "false"); }
+  };
+  $("#readerClose").onclick = stopReader;
+}
+function stopReader() {
+  if (readerTimer) clearInterval(readerTimer);
+  readerTimer = null;
+  $("#reader").classList.add("hidden");
+}
+
+/* ---------- the postcard ---------- */
+function postcardCause() {
+  const L = state.levers, B = state.baseline.levers, c = cur();
+  if (L.monthly !== B.monthly) {
+    return L.monthly > B.monthly
+      ? `saving ${fmtMoney(L.monthly - B.monthly, c)} more a month, starting ${THIS_YEAR}`
+      : `the plan you reshaped in ${THIS_YEAR}`;
+  }
+  if (L.retireAge !== B.retireAge) return `deciding, in ${THIS_YEAR}, to retire at ${L.retireAge}`;
+  if (L.downsizeOn && !B.downsizeOn) return `letting the big house go at ${L.downsizeAge}`;
+  if (L.partTimeOn && !B.partTimeOn) return `keeping a foot in the door until ${L.partTimeUntil}`;
+  return `the monthly ${fmtMoney(L.monthly, c)} you have been setting aside since ${THIS_YEAR}`;
+}
+function wrapText(ctx2d, text, maxW) {
+  const words = text.split(/\s+/), lines = [];
+  let line = "";
+  words.forEach(w => {
+    const t = line ? line + " " + w : w;
+    if (ctx2d.measureText(t).width > maxW && line) { lines.push(line); line = w; }
+    else line = t;
+  });
+  if (line) lines.push(line);
+  return lines;
+}
+function openPostcard() {
+  const cv = $("#postcardCanvas"), g = cv.getContext("2d");
+  const W = cv.width, H = cv.height;
+  const sim = sims[state.levers.mood];
+  const letter = composeLetter(currentPlan(), state.ui.age, sim, { overfunded, earliestAge: earliest });
+  const moneySlot = letter.slots.find(s => s.id === "extra") || letter.slots.find(s => s.kind === "money");
+  let line = moneySlot ? moneySlot.text : "Nothing happened today, and it was enough.";
+  if (line.length > 220) line = line.slice(0, 217).replace(/\s+\S*$/, "") + "…";
+
+  g.fillStyle = "#f7f0df"; g.fillRect(0, 0, W, H);
+  g.strokeStyle = "#c9b888";
+  g.lineWidth = 3; g.strokeRect(26, 26, W - 52, H - 52);
+  g.strokeStyle = "#decfae"; g.lineWidth = 1; g.strokeRect(38, 38, W - 76, H - 76);
+  g.fillStyle = "#7d6b50";
+  g.font = "600 26px Karla, sans-serif";
+  g.textAlign = "center";
+  g.fillText("A  P O S T C A R D   F R O M   Y O U R S E L F,   A T   " + letter.age, W / 2, 110);
+  g.fillStyle = "#2c3a56";
+  g.font = "italic 44px Lora, Georgia, serif";
+  const lines = wrapText(g, "“" + line + "”", W - 220);
+  const startY = H / 2 - (lines.length - 1) * 31 - 20;
+  lines.forEach((l, i) => g.fillText(l, W / 2, startY + i * 62));
+  g.font = "30px Lora, Georgia, serif";
+  g.fillStyle = "#54617c";
+  g.fillText("— " + state.profile.name + ", " + letter.calYear, W / 2, H - 170);
+  g.font = "italic 24px Lora, Georgia, serif";
+  g.fillStyle = "#7d6b50";
+  const cause = wrapText(g, "made possible by " + postcardCause(), W - 260);
+  cause.forEach((l, i) => g.fillText(l, W / 2, H - 120 + i * 32));
+  g.font = "600 16px Karla, sans-serif";
+  g.fillStyle = "#9b8a6c";
+  g.fillText("T H E   T U E S D A Y   L E T T E R S", W / 2, H - 56);
+
+  $("#postcardSave").href = cv.toDataURL("image/png");
+  $("#postcardModal").classList.remove("hidden");
+  $("#postcardClose").onclick = () => $("#postcardModal").classList.add("hidden");
+}
+
+/* ---------- write back ---------- */
+function fmtDate(iso) {
+  try { return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }); }
+  catch (e) { return iso; }
+}
+function openWriteback(reading) {
+  const wb = state.writeback;
+  $("#wbReceived").classList.toggle("hidden", !(reading && wb));
+  if (reading && wb) {
+    $("#wbTitle").textContent = "From you, to you";
+    $("#wbSub").textContent = "Written on " + fmtDate(wb.date) + ". Your future self has kept it.";
+    $("#wbReceived").innerHTML = `<div class="letter" style="margin-bottom:14px;font-size:16px">${esc(wb.text).replace(/\n/g, "<br>")}</div>`;
+  } else {
+    $("#wbTitle").textContent = "Write back";
+    $("#wbSub").textContent = "A few lines to the person who has been writing to you. They will keep it, and so will this page.";
+  }
+  $("#wbText").value = "";
+  $("#wbText").placeholder = "Dear me, at " + state.ui.age + " —";
+  $("#writeback").classList.remove("hidden");
+  $("#wbClose").onclick = () => $("#writeback").classList.add("hidden");
+  $("#wbSave").onclick = () => {
+    const t = $("#wbText").value.trim();
+    if (t) {
+      state.writeback = { text: t, date: new Date().toISOString() };
+      saveState(); renderReturnMail();
+    }
+    $("#writeback").classList.add("hidden");
+  };
+}
+function renderReturnMail() {
+  const el = $("#returnMail");
+  if (state.writeback) {
+    el.classList.remove("hidden");
+    el.innerHTML = `<span>There is a letter waiting — you wrote to yourself on <b>${esc(fmtDate(state.writeback.date))}</b>.</span>
+      <button class="btn" id="readWbBtn">Read it</button>`;
+    $("#readWbBtn").onclick = () => openWriteback(true);
+  } else el.classList.add("hidden");
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+function boot() {
+  const saved = loadState();
+  if (saved) {
+    state = saved;
+    state.assume = Object.assign({}, DEFAULT_ASSUME, state.assume);
+    applyTheme();
+    showDesk();
+  } else {
+    $("#intake").classList.remove("hidden");
+    renderIntake();
+  }
+}
+
+const TL = { simulate, composeLetter, earliestRetireAge, bandOf, monthlyCost,
+  DEFAULT_ASSUME, VIG, LUX_LINES, SIGNOFFS, CLOSINGS, WEATHER, PREWORK,
+  fill, peopleOf, buildState, defaultLevers, fmtMoney, fmtMoneyShort };
+if (typeof module !== "undefined" && module.exports) module.exports = TL;
+if (typeof document !== "undefined") boot();
+</script>
+</body>
+</html>
