@@ -41,8 +41,10 @@ export default function Shell({ children }: { children: ReactNode }) {
   const [dark, toggleDark] = useTheme();
   const [open, setOpen] = useState(false);
 
-  // Load saved plan from localStorage after mount (persist has skipHydration).
+  // Load saved plan from localStorage after mount (persist has skipHydration),
+  // and signal the layout's watchdog that the app bundle is alive.
   useEffect(() => {
+    (window as unknown as Record<string, unknown>).__mythosHydrated = true;
     usePlanner.persist.rehydrate();
   }, []);
 
