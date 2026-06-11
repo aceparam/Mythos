@@ -16,6 +16,7 @@ import {
   Moon,
   PieChart,
   ReceiptIndianRupee,
+  Sparkles,
   Sun,
   Target,
   TrendingUp,
@@ -25,6 +26,7 @@ import {
 
 const NAV = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/oracle", label: "The Oracle", icon: Sparkles },
   { href: "/calculator", label: "Retirement Calculator", icon: Calculator },
   { href: "/networth", label: "Net Worth", icon: Wallet },
   { href: "/montecarlo", label: "Monte Carlo", icon: TrendingUp },
